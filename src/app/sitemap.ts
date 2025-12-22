@@ -4,9 +4,51 @@ import { ALL_CATEGORY_SLUGS } from '@/lib/utils/categories';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://learn.gostudiom.com';
 
-// Sitemap limits (standard sitemap max is 50,000 URLs)
-const VIDEO_LIMIT = 50000;
-const NEWS_LIMIT = 10000;
+// Batch size for pagination (Supabase default limit is 1000)
+const BATCH_SIZE = 1000;
+
+// Helper to fetch all rows with pagination
+async function fetchAllRows<T>(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  table: string,
+  select: string,
+  filters: { column: string; value: string }[],
+  orderBy: { column: string; ascending: boolean }
+): Promise<T[]> {
+  const allRows: T[] = [];
+  let offset = 0;
+  let hasMore = true;
+
+  while (hasMore) {
+    let query = supabase
+      .from(table)
+      .select(select)
+      .range(offset, offset + BATCH_SIZE - 1)
+      .order(orderBy.column, { ascending: orderBy.ascending });
+
+    // Apply filters
+    for (const filter of filters) {
+      query = query.eq(filter.column, filter.value);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+      console.error(`[Sitemap] Error fetching ${table}:`, error);
+      break;
+    }
+
+    if (data && data.length > 0) {
+      allRows.push(...(data as T[]));
+      offset += BATCH_SIZE;
+      hasMore = data.length === BATCH_SIZE;
+    } else {
+      hasMore = false;
+    }
+  }
+
+  return allRows;
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const supabase = await createClient();
@@ -53,39 +95,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // Video pages - use slug for SEO-friendly URLs
-  const { data: videos, error: videoError } = await supabase
-    .from('videos_parsed')
-    .select('slug, youtube_video_id, updated_at')
-    .eq('ai_status', 'completed')
-    .order('score', { ascending: false })
-    .limit(VIDEO_LIMIT);
+  // Video pages - use slug for SEO-friendly URLs (paginated to bypass 1000 row limit)
+  type VideoRow = { slug: string | null; youtube_video_id: string; updated_at: string | null };
+  const videos = await fetchAllRows<VideoRow>(
+    supabase,
+    'videos_parsed',
+    'slug, youtube_video_id, updated_at',
+    [{ column: 'ai_status', value: 'completed' }],
+    { column: 'score', ascending: false }
+  );
 
-  if (videoError) {
-    console.error('[Sitemap] Video query error:', videoError);
-  }
-
-  const videoPages: MetadataRoute.Sitemap = (videos || []).map((video) => ({
+  const videoPages: MetadataRoute.Sitemap = videos.map((video) => ({
     url: `${BASE_URL}/videos/${video.slug || video.youtube_video_id}`,
     lastModified: video.updated_at ? new Date(video.updated_at) : new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
   }));
 
-  // News pages - slug column exists for news_articles
-  const { data: news, error: newsError } = await supabase
-    .from('news_articles')
-    .select('slug, id, updated_at')
-    .eq('status', 'parsed')
-    .eq('is_relevant', true)
-    .order('published_at', { ascending: false })
-    .limit(NEWS_LIMIT);
+  // News pages - slug column exists for news_articles (paginated)
+  type NewsRow = { slug: string | null; id: string; updated_at: string | null };
+  const news = await fetchAllRows<NewsRow>(
+    supabase,
+    'news_articles',
+    'slug, id, updated_at',
+    [
+      { column: 'status', value: 'parsed' },
+      { column: 'is_relevant', value: 'true' },
+    ],
+    { column: 'published_at', ascending: false }
+  );
 
-  if (newsError) {
-    console.error('[Sitemap] News query error:', newsError);
-  }
-
-  const newsPages: MetadataRoute.Sitemap = (news || []).map((article) => ({
+  const newsPages: MetadataRoute.Sitemap = news.map((article) => ({
     url: `${BASE_URL}/news/${article.slug || article.id}`,
     lastModified: article.updated_at ? new Date(article.updated_at) : new Date(),
     changeFrequency: 'monthly' as const,
