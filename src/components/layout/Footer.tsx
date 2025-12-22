@@ -18,7 +18,7 @@ export function Footer() {
   return (
     <footer className="border-t bg-muted/50 mt-20">
       <div className="container py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8">
           {/* Logo column */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <div className="relative h-14 w-56 mb-4">
