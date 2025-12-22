@@ -43,7 +43,11 @@ export function Footer() {
                 <li>
                   <a
                     href={column.mainLink.href}
-                    className="hover:text-foreground transition-colors font-medium text-primary"
+                    className={`hover:text-foreground transition-colors ${
+                      'noHighlight' in column.mainLink && column.mainLink.noHighlight
+                        ? 'text-muted-foreground'
+                        : 'font-medium text-primary'
+                    }`}
                   >
                     {column.mainLink.label}
                   </a>
