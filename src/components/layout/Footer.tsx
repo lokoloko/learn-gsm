@@ -1,131 +1,116 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/image'
+import { FOOTER_PRODUCT_COLUMNS, FOOTER_LINKS, TRUST_SIGNALS } from '@/lib/shared-content'
 
-const footerLinks = {
-  resources: [
-    { name: 'Videos', href: '/videos' },
-    { name: 'News', href: '/news' },
-    { name: 'Topics', href: '/topics' },
-  ],
-  tools: [
-    { name: 'Listing Analyzer', href: 'https://listings.gostudiom.com', external: true },
-    { name: 'Calendar', href: 'https://calendar.gostudiom.com', external: true },
-    { name: 'Market Research', href: 'https://research.gostudiom.com', external: true },
-  ],
-  company: [
-    { name: 'About GoStudioM', href: 'https://gostudiom.com/about', external: true },
-    { name: 'Contact', href: 'https://gostudiom.com/contact', external: true },
-    { name: 'Privacy Policy', href: '/privacy' },
-    { name: 'Terms of Service', href: '/terms' },
-  ],
-};
-
+/**
+ * Shared Footer Component - Product-Centric Structure
+ *
+ * Layout: Logo | Listing Analyzer | Cleaning Calendar | Financial Analytics | Learn | Compare | Legal
+ *
+ * Each product column shows:
+ * - Product name as header
+ * - Main CTA link
+ * - Related free tools
+ * - "All X Tools →" link to category anchor
+ */
 export function Footer() {
+  const productColumns = Object.values(FOOTER_PRODUCT_COLUMNS)
+
   return (
-    <footer className="border-t border-border bg-muted/30">
+    <footer className="border-t bg-muted/50 mt-20">
       <div className="container py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center">
-              <div className="relative h-10 w-40">
-                <Image
-                  src="/gostudiom-logo.png"
-                  alt="GoStudioM"
-                  fill
-                  className="object-contain object-left"
-                  sizes="160px"
-                />
-              </div>
-            </Link>
-            <p className="mt-4 text-sm text-muted-foreground max-w-xs">
-              The knowledge hub for short-term rental hosts. Learn from top creators, stay updated with industry news.
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8">
+          {/* Logo column */}
+          <div className="col-span-2 md:col-span-4 lg:col-span-1">
+            <div className="relative h-14 w-56 mb-4">
+              <Image
+                src="/gostudiom-logo.png"
+                alt="GoStudioM"
+                fill
+                className="object-contain object-left"
+              />
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              {TRUST_SIGNALS.tagline}
             </p>
           </div>
 
-          {/* Resources */}
-          <div>
-            <h3 className="font-semibold text-sm mb-4">Resources</h3>
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          {/* Product columns - Listing Analyzer, Cleaning Calendar, Financial Analytics, Learn */}
+          {productColumns.map((column) => (
+            <div key={column.title}>
+              <h3 className="text-sm font-medium mb-3">{column.title}</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                {/* Main product CTA */}
+                <li>
+                  <a
+                    href={column.mainLink.href}
+                    className="hover:text-foreground transition-colors font-medium text-primary"
                   >
-                    {link.name}
-                  </Link>
+                    {column.mainLink.label}
+                  </a>
                 </li>
-              ))}
-            </ul>
-          </div>
+                {/* Related free tools */}
+                {column.tools.map((tool) => (
+                  <li key={tool.href}>
+                    <a
+                      href={tool.href}
+                      className="hover:text-foreground transition-colors"
+                    >
+                      {tool.label}
+                    </a>
+                  </li>
+                ))}
+                {/* Category anchor link */}
+                <li className="pt-1">
+                  <a
+                    href={column.cta.href}
+                    className="text-xs text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {column.cta.label}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          ))}
 
-          {/* Tools */}
+          {/* Compare */}
           <div>
-            <h3 className="font-semibold text-sm mb-4">Free Tools</h3>
-            <ul className="space-y-3">
-              {footerLinks.tools.map((link) => (
-                <li key={link.name}>
+            <h3 className="text-sm font-medium mb-3">Compare</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              {FOOTER_LINKS.compare.map((link) => (
+                <li key={link.href}>
                   <a
                     href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="hover:text-foreground transition-colors"
                   >
-                    {link.name}
+                    {link.label}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Legal + Support combined */}
           <div>
-            <h3 className="font-semibold text-sm mb-4">Company</h3>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.name}>
-                  {link.external ? (
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {link.name}
-                    </a>
-                  ) : (
-                    <Link
-                      href={link.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  )}
+            <h3 className="text-sm font-medium mb-3">Legal</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              {FOOTER_LINKS.legal.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="hover:text-foreground transition-colors"
+                  >
+                    {link.label}
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} GoStudioM. All rights reserved.
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Part of the{' '}
-            <a
-              href="https://gostudiom.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
-            >
-              GoStudioM Platform
-            </a>
-          </p>
+        <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
+          <p>&copy; {new Date().getFullYear()} GoStudioM. All rights reserved.</p>
         </div>
       </div>
     </footer>
-  );
+  )
 }
