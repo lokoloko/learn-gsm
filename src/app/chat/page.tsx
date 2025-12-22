@@ -15,20 +15,10 @@ export default async function ChatPage({ searchParams }: ChatPageProps) {
   const { q: initialQuery } = await searchParams;
 
   return (
-    <div className="fixed inset-0 top-16 flex flex-col bg-background">
-      {/* Header */}
-      <div className="border-b px-4 py-3 flex-shrink-0">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-lg font-semibold">STR Knowledge Assistant</h1>
-          <p className="text-sm text-muted-foreground">
-            Powered by expert videos and industry news
-          </p>
-        </div>
-      </div>
-
-      {/* Chat */}
-      <div className="flex-1 overflow-hidden max-w-3xl mx-auto w-full">
-        <Chat className="h-full" initialQuery={initialQuery} />
+    <div className="min-h-[calc(100vh-4rem)] flex flex-col">
+      {/* Chat Container */}
+      <div className="flex-1 max-w-3xl mx-auto w-full px-4">
+        <Chat initialQuery={initialQuery} />
       </div>
     </div>
   );

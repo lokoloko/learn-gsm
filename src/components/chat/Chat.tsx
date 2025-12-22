@@ -51,6 +51,7 @@ export function Chat({ className, initialQuery }: ChatProps) {
   });
 
   const isLoading = status === 'streaming' || status === 'submitted';
+  const hasMessages = messages.length > 0;
 
   // Auto-send initial query from URL
   useEffect(() => {
@@ -82,47 +83,80 @@ export function Chat({ className, initialQuery }: ChatProps) {
     await sendMessage({ text: message });
   };
 
+  // Empty state - centered welcome with input
+  if (!hasMessages) {
+    return (
+      <div className={`flex flex-col items-center justify-center min-h-[60vh] py-12 ${className || ''}`}>
+        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+          <span className="text-3xl">🏠</span>
+        </div>
+        <h1 className="text-2xl font-semibold mb-2">STR Knowledge Assistant</h1>
+        <p className="text-muted-foreground mb-8 max-w-md text-center">
+          Ask me anything about short-term rentals. I have access to expert videos
+          and industry news to help you succeed as a host.
+        </p>
+
+        {/* Input */}
+        <div className="w-full max-w-2xl mb-6">
+          <form onSubmit={onSubmit} className="flex gap-2">
+            <Input
+              value={input}
+              onChange={handleInputChange}
+              placeholder="Ask about short-term rentals..."
+              disabled={isLoading || rateLimitExceeded}
+              className="flex-1 h-12 text-base"
+            />
+            <Button
+              type="submit"
+              disabled={isLoading || !input.trim() || rateLimitExceeded}
+              size="lg"
+              className="h-12 px-6"
+            >
+              {isLoading ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
+              ) : (
+                <Send className="h-5 w-5" />
+              )}
+            </Button>
+          </form>
+        </div>
+
+        <StarterPrompts onSelect={handleStarterPrompt} />
+      </div>
+    );
+  }
+
+  // Chat view with messages
   return (
-    <div className={`flex flex-col h-full ${className || ''}`}>
-      {/* Messages Area */}
-      <div className="flex-1 min-h-0 overflow-y-auto p-4 space-y-4">
-        {messages.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center text-center px-4">
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-              <span className="text-2xl">🏠</span>
-            </div>
-            <h2 className="text-xl font-semibold mb-2">STR Knowledge Assistant</h2>
-            <p className="text-muted-foreground mb-6 max-w-md">
-              Ask me anything about short-term rentals. I have access to expert videos
-              and industry news to help you succeed as a host.
-            </p>
-            <StarterPrompts onSelect={handleStarterPrompt} />
-          </div>
-        ) : (
-          <>
-            {messages.map((message, index) => (
-              <ChatMessage
-                key={`${message.id}-${index}`}
-                role={message.role as 'user' | 'assistant'}
-                content={getMessageContent(message)}
-                isStreaming={isLoading && index === messages.length - 1 && message.role === 'assistant'}
-              />
-            ))}
-            {isLoading && messages[messages.length - 1]?.role === 'user' && (
-              <div className="flex justify-start">
-                <div className="bg-muted rounded-2xl px-4 py-3">
-                  <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-                </div>
+    <div className={`flex flex-col min-h-[60vh] py-8 ${className || ''}`}>
+      {/* Messages */}
+      <div className="flex-1 space-y-6 mb-8">
+        {messages.map((message, index) => (
+          <ChatMessage
+            key={`${message.id}-${index}`}
+            role={message.role as 'user' | 'assistant'}
+            content={getMessageContent(message)}
+            isStreaming={isLoading && index === messages.length - 1 && message.role === 'assistant'}
+          />
+        ))}
+        {isLoading && messages[messages.length - 1]?.role === 'user' && (
+          <div className="flex justify-start">
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span className="text-sm">🏠</span>
               </div>
-            )}
-          </>
+              <div className="bg-muted rounded-2xl px-4 py-3">
+                <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+              </div>
+            </div>
+          </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
       {/* Rate Limit Warning */}
       {rateLimitExceeded && (
-        <div className="mx-4 mb-2 p-3 bg-destructive/10 border border-destructive/20 rounded-lg flex items-center gap-2 text-sm">
+        <div className="mb-4 p-3 bg-destructive/10 border border-destructive/20 rounded-lg flex items-center gap-2 text-sm">
           <AlertCircle className="h-4 w-4 text-destructive flex-shrink-0" />
           <span>
             You&apos;ve reached the daily limit for free chats.{' '}
@@ -136,20 +170,20 @@ export function Chat({ className, initialQuery }: ChatProps) {
 
       {/* Remaining Messages Indicator */}
       {remainingMessages !== null && remainingMessages <= 2 && !rateLimitExceeded && (
-        <div className="mx-4 mb-2 text-xs text-muted-foreground text-center">
+        <div className="mb-2 text-xs text-muted-foreground text-center">
           {remainingMessages} free {remainingMessages === 1 ? 'message' : 'messages'} remaining today
         </div>
       )}
 
       {/* Error Display */}
       {error && !rateLimitExceeded && (
-        <div className="mx-4 mb-2 p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
+        <div className="mb-4 p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-sm text-destructive">
           {error.message || 'Something went wrong. Please try again.'}
         </div>
       )}
 
-      {/* Input Area */}
-      <div className="border-t p-4 flex-shrink-0 bg-background">
+      {/* Input Area - sticky at bottom */}
+      <div className="sticky bottom-0 bg-background pt-4 pb-2">
         <form onSubmit={onSubmit} className="flex gap-2">
           <Input
             value={input}
@@ -157,23 +191,27 @@ export function Chat({ className, initialQuery }: ChatProps) {
             placeholder={
               rateLimitExceeded
                 ? 'Sign up to continue chatting...'
-                : 'Ask about short-term rentals...'
+                : 'Ask a follow-up question...'
             }
             disabled={isLoading || rateLimitExceeded}
-            className="flex-1"
+            className="flex-1 h-12 text-base"
           />
           <Button
             type="submit"
             disabled={isLoading || !input.trim() || rateLimitExceeded}
-            size="icon"
+            size="lg"
+            className="h-12 px-6"
           >
             {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
+              <Loader2 className="h-5 w-5 animate-spin" />
             ) : (
-              <Send className="h-4 w-4" />
+              <Send className="h-5 w-5" />
             )}
           </Button>
         </form>
+        <p className="text-xs text-muted-foreground text-center mt-2">
+          Powered by expert videos and industry news
+        </p>
       </div>
     </div>
   );
