@@ -24,10 +24,7 @@ async function getVideo(slug: string) {
   // Try to find by slug first, then by youtube_video_id
   let { data: video, error } = await supabase
     .from('videos_parsed')
-    .select(`
-      *,
-      channel:videos_channels!channel_id(id, channel_id, slug, title, thumbnail_url, handle, subscriber_count)
-    `)
+    .select('*')
     .eq('slug', slug)
     .eq('ai_status', 'completed')
     .single();
@@ -36,10 +33,7 @@ async function getVideo(slug: string) {
     // Fallback to youtube_video_id
     const result = await supabase
       .from('videos_parsed')
-      .select(`
-        *,
-        channel:videos_channels!channel_id(id, channel_id, slug, title, thumbnail_url, handle, subscriber_count)
-      `)
+      .select('*')
       .eq('youtube_video_id', slug)
       .eq('ai_status', 'completed')
       .single();
@@ -49,7 +43,7 @@ async function getVideo(slug: string) {
   }
 
   if (error || !video) return null;
-  return video as Video & { channel: any[] | null };
+  return video as Video;
 }
 
 async function getVideoKnowledge(videoId: string) {
@@ -70,9 +64,8 @@ async function getRelatedVideos(video: Video) {
   const { data } = await supabase
     .from('videos_parsed')
     .select(`
-      id, slug, youtube_video_id, title, thumbnail_url,
-      category, skill_level, score, duration, view_count, published_at, channel_id, channel_title,
-      channel:videos_channels!channel_id(slug, title, thumbnail_url)
+      id, youtube_video_id, title, summary, thumbnail_url,
+      category, skill_level, score, duration, view_count, published_at, channel_id, channel_title
     `)
     .eq('ai_status', 'completed')
     .neq('id', video.id)
@@ -81,6 +74,19 @@ async function getRelatedVideos(video: Video) {
     .limit(4);
 
   return (data || []) as VideoWithChannel[];
+}
+
+async function getChannel(channelId: string) {
+  const supabase = await createClient();
+
+  const { data } = await supabase
+    .from('videos_channels')
+    .select('id, channel_id, slug, title, thumbnail_url, handle, subscriber_count')
+    .eq('channel_id', channelId)
+    .eq('status', 'active')
+    .single();
+
+  return data;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -140,12 +146,11 @@ export default async function VideoDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const [knowledge, relatedVideos] = await Promise.all([
+  const [knowledge, relatedVideos, channel] = await Promise.all([
     getVideoKnowledge(video.video_id),
     getRelatedVideos(video),
+    video.channel_id ? getChannel(video.channel_id) : Promise.resolve(null),
   ]);
-
-  const channel = video.channel?.[0];
 
   // Group knowledge by type
   const insights = knowledge.filter((k) => k.knowledge_type === 'insight');
@@ -202,10 +207,7 @@ export default async function VideoDetailPage({ params }: PageProps) {
 
           {/* Channel */}
           {channel && (
-            <Link
-              href={`/creators/${channel.slug || channel.channel_id}`}
-              className="flex items-center gap-3 mb-6 p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
-            >
+            <div className="flex items-center gap-3 mb-6 p-4 rounded-lg bg-muted/50">
               {channel.thumbnail_url ? (
                 <Image
                   src={channel.thumbnail_url}
@@ -225,7 +227,7 @@ export default async function VideoDetailPage({ params }: PageProps) {
                   <p className="text-sm text-muted-foreground">@{channel.handle.replace('@', '')}</p>
                 )}
               </div>
-            </Link>
+            </div>
           )}
 
           {/* Tags */}

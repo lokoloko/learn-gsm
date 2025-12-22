@@ -4,8 +4,7 @@ import { Header } from '@/components/layout/Header';
 describe('Header component', () => {
   it('renders the logo', () => {
     render(<Header />);
-    expect(screen.getByText('L')).toBeInTheDocument();
-    expect(screen.getByText('Learn STR')).toBeInTheDocument();
+    expect(screen.getByAltText('GoStudioM')).toBeInTheDocument();
   });
 
   it('renders all navigation links', () => {
@@ -13,7 +12,6 @@ describe('Header component', () => {
     expect(screen.getByRole('link', { name: /videos/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /news/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /topics/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /creators/i })).toBeInTheDocument();
   });
 
   it('has correct href for navigation links', () => {
@@ -21,7 +19,6 @@ describe('Header component', () => {
     expect(screen.getByRole('link', { name: /videos/i })).toHaveAttribute('href', '/videos');
     expect(screen.getByRole('link', { name: /news/i })).toHaveAttribute('href', '/news');
     expect(screen.getByRole('link', { name: /topics/i })).toHaveAttribute('href', '/topics');
-    expect(screen.getByRole('link', { name: /creators/i })).toHaveAttribute('href', '/creators');
   });
 
   it('renders Ask AI button with link to chat', () => {
@@ -71,7 +68,7 @@ describe('Header component', () => {
 
   it('renders logo link to homepage', () => {
     render(<Header />);
-    const logoLink = screen.getByRole('link', { name: /learn str/i });
+    const logoLink = screen.getByRole('link', { name: /gostudiom/i });
     expect(logoLink).toHaveAttribute('href', '/');
   });
 });

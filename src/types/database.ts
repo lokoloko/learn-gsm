@@ -62,10 +62,9 @@ export interface Video {
   created_at: string;
 }
 
-// Video with channel join (partial for list views)
+// Video for list views (no channel join)
 export interface VideoWithChannel {
   id: string;
-  slug: string | null;
   youtube_video_id: string;
   channel_id: string | null;
   channel_title: string | null;
@@ -78,7 +77,6 @@ export interface VideoWithChannel {
   duration: number | null;
   view_count: number | null;
   published_at: string | null;
-  channel: Pick<Channel, 'slug' | 'title' | 'thumbnail_url'>[] | null;
 }
 
 // Video Knowledge
@@ -187,12 +185,8 @@ export interface NewsKnowledge {
 }
 
 // Helper type for URL generation
-export function getVideoUrl(video: Pick<Video, 'slug' | 'youtube_video_id'>): string {
-  return `/videos/${video.slug || video.youtube_video_id}`;
-}
-
-export function getChannelUrl(channel: Pick<Channel, 'slug' | 'channel_id'>): string {
-  return `/creators/${channel.slug || channel.channel_id}`;
+export function getVideoUrl(video: Pick<VideoWithChannel, 'youtube_video_id'>): string {
+  return `/videos/${video.youtube_video_id}`;
 }
 
 export function getNewsUrl(article: Pick<NewsArticle, 'slug' | 'id'>): string {

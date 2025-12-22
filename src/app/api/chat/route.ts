@@ -215,6 +215,7 @@ export async function POST(req: Request) {
       messages: modelMessages,
     });
 
+    // Use toTextStreamResponse for compatibility with TextStreamChatTransport
     const response = result.toTextStreamResponse();
 
     // Add rate limit header to response

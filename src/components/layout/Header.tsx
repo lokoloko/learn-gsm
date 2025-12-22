@@ -1,15 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
-import { Menu, X, PlayCircle, Newspaper, Grid3X3, Users, MessageCircle } from 'lucide-react';
+import { Menu, X, PlayCircle, Newspaper, Grid3X3, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navigation = [
   { name: 'Videos', href: '/videos', icon: PlayCircle },
   { name: 'News', href: '/news', icon: Newspaper },
   { name: 'Topics', href: '/topics', icon: Grid3X3 },
-  { name: 'Creators', href: '/creators', icon: Users },
 ];
 
 export function Header() {
@@ -19,11 +19,17 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">
-            L
+        <Link href="/" className="flex items-center">
+          <div className="relative h-10 w-40">
+            <Image
+              src="/gostudiom-logo.png"
+              alt="GoStudioM"
+              fill
+              className="object-contain object-left"
+              priority
+              sizes="160px"
+            />
           </div>
-          <span className="font-semibold text-lg hidden sm:block">Learn STR</span>
         </Link>
 
         {/* Desktop Navigation */}

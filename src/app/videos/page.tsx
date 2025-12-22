@@ -28,9 +28,8 @@ async function getVideos(category?: string, skillLevel?: string, page = 1) {
   let query = supabase
     .from('videos_parsed')
     .select(`
-      id, slug, youtube_video_id, title, summary, thumbnail_url,
-      category, skill_level, score, duration, view_count, published_at, channel_id, channel_title,
-      channel:videos_channels!channel_id(slug, title, thumbnail_url)
+      id, youtube_video_id, title, summary, thumbnail_url,
+      category, skill_level, score, duration, view_count, published_at, channel_id, channel_title
     `)
     .eq('ai_status', 'completed')
     .order('score', { ascending: false });

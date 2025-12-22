@@ -4,7 +4,6 @@ import type { VideoWithChannel } from '@/types/database';
 
 const mockVideo: VideoWithChannel = {
   id: 'video-123',
-  slug: 'how-to-start-airbnb-xyz123',
   youtube_video_id: 'xyz123',
   channel_id: 'channel-456',
   channel_title: 'STR Expert',
@@ -17,13 +16,6 @@ const mockVideo: VideoWithChannel = {
   duration: 3600,
   view_count: 150000,
   published_at: '2024-01-15T10:00:00Z',
-  channel: [
-    {
-      slug: 'str-expert',
-      title: 'STR Expert Channel',
-      thumbnail_url: 'https://example.com/channel.jpg',
-    },
-  ],
 };
 
 describe('VideoCard component', () => {
@@ -48,12 +40,12 @@ describe('VideoCard component', () => {
 
   it('renders channel info when showChannel is true', () => {
     render(<VideoCard video={mockVideo} showChannel={true} />);
-    expect(screen.getByText('STR Expert Channel')).toBeInTheDocument();
+    expect(screen.getByText('STR Expert')).toBeInTheDocument();
   });
 
   it('hides channel info when showChannel is false', () => {
     render(<VideoCard video={mockVideo} showChannel={false} />);
-    expect(screen.queryByText('STR Expert Channel')).not.toBeInTheDocument();
+    expect(screen.queryByText('STR Expert')).not.toBeInTheDocument();
   });
 
   it('renders duration', () => {
@@ -82,18 +74,8 @@ describe('VideoCard component', () => {
     expect(screen.getByText('beginner')).toBeInTheDocument();
   });
 
-  it('links to correct video URL using slug', () => {
+  it('links to correct video URL using youtube_video_id', () => {
     render(<VideoCard video={mockVideo} />);
-    const links = screen.getAllByRole('link');
-    const videoLink = links.find(link =>
-      link.getAttribute('href')?.includes('/videos/')
-    );
-    expect(videoLink).toHaveAttribute('href', '/videos/how-to-start-airbnb-xyz123');
-  });
-
-  it('links to video using youtube_video_id when slug is null', () => {
-    const videoNoSlug = { ...mockVideo, slug: null };
-    render(<VideoCard video={videoNoSlug} />);
     const links = screen.getAllByRole('link');
     const videoLink = links.find(link =>
       link.getAttribute('href')?.includes('/videos/')
@@ -110,7 +92,6 @@ describe('VideoCard component', () => {
   it('handles missing optional fields gracefully', () => {
     const minimalVideo: VideoWithChannel = {
       id: 'min-video',
-      slug: 'minimal-video',
       youtube_video_id: 'min123',
       channel_id: null,
       channel_title: null,
@@ -123,7 +104,6 @@ describe('VideoCard component', () => {
       duration: null,
       view_count: null,
       published_at: null,
-      channel: null,
     };
 
     render(<VideoCard video={minimalVideo} />);

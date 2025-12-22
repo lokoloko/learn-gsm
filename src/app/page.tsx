@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { ArrowRight, MessageCircle, PlayCircle, Newspaper } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { VideoCard, NewsCard, CategoryCard, CreatorCard } from '@/components/cards';
+import { VideoCard, NewsCard, CategoryCard } from '@/components/cards';
 import { createClient } from '@/lib/supabase-server';
 import { ALL_CATEGORY_SLUGS } from '@/lib/utils/categories';
-import type { VideoWithChannel, NewsArticleWithSource, Channel } from '@/types/database';
+import type { VideoWithChannel, NewsArticleWithSource } from '@/types/database';
+import { HeroChatInput } from '@/components/chat/HeroChatInput';
 
 // Revalidate every 5 minutes
 export const revalidate = 300;
@@ -17,9 +17,8 @@ async function getHomeData() {
   const { data: videos } = await supabase
     .from('videos_parsed')
     .select(`
-      id, slug, youtube_video_id, title, summary, thumbnail_url,
-      category, skill_level, score, duration, view_count, published_at, channel_id, channel_title,
-      channel:videos_channels!channel_id(slug, title, thumbnail_url)
+      id, youtube_video_id, title, summary, thumbnail_url,
+      category, skill_level, score, duration, view_count, published_at, channel_id, channel_title
     `)
     .eq('ai_status', 'completed')
     .order('score', { ascending: false })
@@ -38,23 +37,14 @@ async function getHomeData() {
     .order('published_at', { ascending: false })
     .limit(4);
 
-  // Fetch top creators
-  const { data: creators } = await supabase
-    .from('videos_channels')
-    .select('id, channel_id, title, handle, slug, thumbnail_url, subscriber_count, video_count, status')
-    .eq('status', 'active')
-    .order('subscriber_count', { ascending: false })
-    .limit(6);
-
   return {
     videos: (videos || []) as VideoWithChannel[],
     news: (news || []) as NewsArticleWithSource[],
-    creators: (creators || []) as Channel[],
   };
 }
 
 export default async function HomePage() {
-  const { videos, news, creators } = await getHomeData();
+  const { videos, news } = await getHomeData();
 
   return (
     <div className="flex flex-col">
@@ -71,22 +61,7 @@ export default async function HomePage() {
             </p>
 
             {/* Chat Input */}
-            <div className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
-              <div className="relative flex-1">
-                <MessageCircle className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                <Input
-                  type="text"
-                  placeholder="Ask anything about STR hosting..."
-                  className="pl-10 h-12"
-                />
-              </div>
-              <Link href="/chat">
-                <Button size="lg" className="w-full sm:w-auto">
-                  Ask AI
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
+            <HeroChatInput />
 
             {/* Quick Links */}
             <div className="flex flex-wrap justify-center gap-4 mt-8">
@@ -170,28 +145,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Top Creators */}
-      {creators.length > 0 && (
-        <section className="py-12 lg:py-16 bg-muted/30">
-          <div className="container">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold">Top Creators</h2>
-              <Link href="/creators">
-                <Button variant="ghost" size="sm">
-                  View all
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {creators.map((creator) => (
-                <CreatorCard key={creator.id} channel={creator} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* CTA Section */}
       <section className="py-16 lg:py-24 gradient-bg">

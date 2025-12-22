@@ -1,11 +1,11 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const footerLinks = {
   resources: [
     { name: 'Videos', href: '/videos' },
     { name: 'News', href: '/news' },
     { name: 'Topics', href: '/topics' },
-    { name: 'Creators', href: '/creators' },
   ],
   tools: [
     { name: 'Listing Analyzer', href: 'https://listings.gostudiom.com', external: true },
@@ -27,11 +27,16 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">
-                L
+            <Link href="/" className="flex items-center">
+              <div className="relative h-10 w-40">
+                <Image
+                  src="/gostudiom-logo.png"
+                  alt="GoStudioM"
+                  fill
+                  className="object-contain object-left"
+                  sizes="160px"
+                />
               </div>
-              <span className="font-semibold">Learn STR</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground max-w-xs">
               The knowledge hub for short-term rental hosts. Learn from top creators, stay updated with industry news.

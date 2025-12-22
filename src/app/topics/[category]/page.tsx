@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { VideoCard, NewsCard, CreatorCard } from '@/components/cards';
+import { VideoCard, NewsCard } from '@/components/cards';
 import { Button } from '@/components/ui/button';
 import { createClient } from '@/lib/supabase-server';
 import {
@@ -11,7 +11,7 @@ import {
   slugToCategory,
 } from '@/lib/utils/categories';
 import type { CategorySlug } from '@/lib/utils/categories';
-import type { VideoWithChannel, NewsArticleWithSource, Channel } from '@/types/database';
+import type { VideoWithChannel, NewsArticleWithSource } from '@/types/database';
 
 interface PageProps {
   params: Promise<{ category: string }>;
@@ -54,9 +54,8 @@ async function getTopicData(categorySlug: string) {
   const { data: videos } = await supabase
     .from('videos_parsed')
     .select(`
-      id, slug, youtube_video_id, title, summary, thumbnail_url,
-      category, skill_level, score, duration, view_count, published_at, channel_id, channel_title,
-      channel:videos_channels!channel_id(slug, title, thumbnail_url)
+      id, youtube_video_id, title, summary, thumbnail_url,
+      category, skill_level, score, duration, view_count, published_at, channel_id, channel_title
     `)
     .eq('ai_status', 'completed')
     .eq('category', dbCategory)
@@ -77,41 +76,9 @@ async function getTopicData(categorySlug: string) {
     .order('published_at', { ascending: false })
     .limit(4);
 
-  // Fetch top creators in this category (channels with most videos in category)
-  const { data: channelVideoCounts } = await supabase
-    .from('videos_parsed')
-    .select('channel_id')
-    .eq('ai_status', 'completed')
-    .eq('category', dbCategory);
-
-  // Count videos per channel
-  const channelCounts: Record<string, number> = {};
-  channelVideoCounts?.forEach((v) => {
-    if (v.channel_id) {
-      channelCounts[v.channel_id] = (channelCounts[v.channel_id] || 0) + 1;
-    }
-  });
-
-  // Get top 6 channels by video count in this category
-  const topChannelIds = Object.entries(channelCounts)
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, 6)
-    .map(([id]) => id);
-
-  let creators: Channel[] = [];
-  if (topChannelIds.length > 0) {
-    const { data: channels } = await supabase
-      .from('videos_channels')
-      .select('*')
-      .in('channel_id', topChannelIds)
-      .eq('status', 'active');
-    creators = channels || [];
-  }
-
   return {
     videos: (videos || []) as VideoWithChannel[],
     news: (news || []) as NewsArticleWithSource[],
-    creators,
     meta: CATEGORY_META[categorySlug as CategorySlug],
   };
 }
@@ -124,7 +91,7 @@ export default async function TopicPage({ params }: PageProps) {
     notFound();
   }
 
-  const { videos, news, creators, meta } = data;
+  const { videos, news, meta } = data;
 
   return (
     <div className="container py-8 lg:py-12">
@@ -173,25 +140,6 @@ export default async function TopicPage({ params }: PageProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {videos.map((video) => (
               <VideoCard key={video.id} video={video} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Top Creators */}
-      {creators.length > 0 && (
-        <section className="mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-semibold">Top Creators</h2>
-            <Link href="/creators">
-              <Button variant="ghost" size="sm">
-                View all &rarr;
-              </Button>
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {creators.map((channel) => (
-              <CreatorCard key={channel.id} channel={channel} showStats={false} />
             ))}
           </div>
         </section>

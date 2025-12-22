@@ -2,7 +2,8 @@
 
 import { useRef, useEffect, useState, useMemo } from 'react';
 import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport, type UIMessage } from 'ai';
+import { TextStreamChatTransport } from 'ai';
+import type { UIMessage } from 'ai';
 import { Send, Loader2, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,6 +12,7 @@ import { StarterPrompts } from './StarterPrompts';
 
 interface ChatProps {
   className?: string;
+  initialQuery?: string;
 }
 
 // Helper to extract text content from UIMessage parts
@@ -22,14 +24,15 @@ function getMessageContent(message: UIMessage): string {
     .join('');
 }
 
-export function Chat({ className }: ChatProps) {
+export function Chat({ className, initialQuery }: ChatProps) {
   const [input, setInput] = useState('');
   const [rateLimitExceeded, setRateLimitExceeded] = useState(false);
   const [remainingMessages, setRemainingMessages] = useState<number | null>(null);
+  const [hasProcessedInitialQuery, setHasProcessedInitialQuery] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Create transport with rate limit response handler
-  const transport = useMemo(() => new DefaultChatTransport({
+  const transport = useMemo(() => new TextStreamChatTransport({
     api: '/api/chat',
   }), []);
 
@@ -48,6 +51,14 @@ export function Chat({ className }: ChatProps) {
   });
 
   const isLoading = status === 'streaming' || status === 'submitted';
+
+  // Auto-send initial query from URL
+  useEffect(() => {
+    if (initialQuery && !hasProcessedInitialQuery && !isLoading) {
+      setHasProcessedInitialQuery(true);
+      sendMessage({ text: initialQuery });
+    }
+  }, [initialQuery, hasProcessedInitialQuery, isLoading, sendMessage]);
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -74,7 +85,7 @@ export function Chat({ className }: ChatProps) {
   return (
     <div className={`flex flex-col h-full ${className || ''}`}>
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 min-h-0 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 ? (
           <div className="h-full flex flex-col items-center justify-center text-center px-4">
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
@@ -89,12 +100,12 @@ export function Chat({ className }: ChatProps) {
           </div>
         ) : (
           <>
-            {messages.map((message) => (
+            {messages.map((message, index) => (
               <ChatMessage
-                key={message.id}
+                key={`${message.id}-${index}`}
                 role={message.role as 'user' | 'assistant'}
                 content={getMessageContent(message)}
-                isStreaming={isLoading && message.id === messages[messages.length - 1]?.id && message.role === 'assistant'}
+                isStreaming={isLoading && index === messages.length - 1 && message.role === 'assistant'}
               />
             ))}
             {isLoading && messages[messages.length - 1]?.role === 'user' && (
@@ -138,7 +149,7 @@ export function Chat({ className }: ChatProps) {
       )}
 
       {/* Input Area */}
-      <div className="border-t p-4">
+      <div className="border-t p-4 flex-shrink-0 bg-background">
         <form onSubmit={onSubmit} className="flex gap-2">
           <Input
             value={input}

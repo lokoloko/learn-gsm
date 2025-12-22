@@ -65,28 +65,15 @@ export function VideoCard({ video, showChannel = true }: VideoCardProps) {
         </Link>
 
         {/* Channel */}
-        {showChannel && video.channel && video.channel[0] && (
-          <Link
-            href={`/creators/${video.channel[0].slug || video.channel_id}`}
-            className="flex items-center gap-2 mb-2"
-          >
-            {video.channel[0].thumbnail_url ? (
-              <Image
-                src={video.channel[0].thumbnail_url}
-                alt={video.channel[0].title || 'Channel'}
-                width={24}
-                height={24}
-                className="rounded-full"
-              />
-            ) : (
-              <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center text-xs font-medium">
-                {video.channel[0].title?.[0] || 'C'}
-              </div>
-            )}
-            <span className="text-xs text-muted-foreground hover:text-foreground truncate">
-              {video.channel[0].title || video.channel_title}
+        {showChannel && video.channel_title && (
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center text-xs font-medium">
+              {video.channel_title[0]}
+            </div>
+            <span className="text-xs text-muted-foreground truncate">
+              {video.channel_title}
             </span>
-          </Link>
+          </div>
         )}
 
         {/* Meta */}

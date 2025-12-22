@@ -2,7 +2,7 @@
  * Tests for formatting utilities used across the app
  */
 
-// Subscriber count formatting (same logic as in CreatorCard and Creator page)
+// Subscriber count formatting utility
 function formatSubscriberCount(count: number | null): string {
   if (!count) return '';
   if (count >= 1000000) {

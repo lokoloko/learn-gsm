@@ -4,8 +4,7 @@ import { Footer } from '@/components/layout/Footer';
 describe('Footer component', () => {
   it('renders the brand section', () => {
     render(<Footer />);
-    expect(screen.getByText('L')).toBeInTheDocument();
-    expect(screen.getByText('Learn STR')).toBeInTheDocument();
+    expect(screen.getByAltText('GoStudioM')).toBeInTheDocument();
   });
 
   it('renders the brand description', () => {
@@ -20,7 +19,6 @@ describe('Footer component', () => {
     expect(screen.getByRole('link', { name: 'Videos' })).toHaveAttribute('href', '/videos');
     expect(screen.getByRole('link', { name: 'News' })).toHaveAttribute('href', '/news');
     expect(screen.getByRole('link', { name: 'Topics' })).toHaveAttribute('href', '/topics');
-    expect(screen.getByRole('link', { name: 'Creators' })).toHaveAttribute('href', '/creators');
   });
 
   it('renders Free Tools section with external links', () => {
