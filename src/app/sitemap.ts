@@ -2,7 +2,11 @@ import type { MetadataRoute } from 'next';
 import { createClient } from '@/lib/supabase-server';
 import { ALL_CATEGORY_SLUGS } from '@/lib/utils/categories';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://learn.gostudiom.com';
+// Allow up to 60 seconds for sitemap generation (pagination + large dataset)
+export const maxDuration = 60;
+
+// Trim any trailing whitespace from env variable
+const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://learn.gostudiom.com').trim();
 
 // Batch size for pagination (Supabase default limit is 1000)
 const BATCH_SIZE = 1000;
