@@ -52,6 +52,8 @@ interface KnowledgeResult {
   category: string | null;
   skill_level: string | null;
   rank: number;
+  channel_title?: string; // For videos
+  source_name?: string; // For news
 }
 
 const formatContext = (results: KnowledgeResult[]): string => {
@@ -69,32 +71,53 @@ const formatContext = (results: KnowledgeResult[]): string => {
     .join('\n\n---\n\n');
 };
 
-const createSystemPrompt = (context: string, contextCount: number): string => {
+interface ContextStats {
+  contextCount: number;
+  videoCount: number;
+  newsCount: number;
+  creators: string[];
+}
+
+const createSystemPrompt = (context: string, stats: ContextStats): string => {
+  const { contextCount, videoCount, newsCount, creators } = stats;
+
+  const sourcesLine = creators.length > 0
+    ? `Sources include content from: ${creators.join(', ')}${creators.length < contextCount ? ', and others' : ''}.`
+    : '';
+
   return `You are an expert STR (short-term rental) hosting assistant for Learn STR by GoStudioM.
 
 CONTEXT:
-You have access to a curated knowledge base of ${contextCount} items from STR creator videos and industry news.
+You have access to a curated knowledge base of ${contextCount} items extracted from ${videoCount > 0 ? `${videoCount}+ creator videos` : ''}${videoCount > 0 && newsCount > 0 ? ' and ' : ''}${newsCount > 0 ? `${newsCount}+ industry news articles` : ''}.
+${sourcesLine}
 
 <context>
 ${context}
 </context>
 
-GUIDELINES:
-- Cite sources naturally: "According to [video/article title]..."
-- Be concise, practical, and actionable
-- If context doesn't cover the question, use your general knowledge but note it
-- For regulations, always recommend verifying with local authorities
-- Format responses with markdown for readability
+YOUR PERSONALITY:
+- Experienced host helping a fellow host
+- Practical and direct, not salesy
+- Use "you" and "your" to make it personal
+
+RESPONSE GUIDELINES:
+- Lead with the direct answer, then supporting details
+- Cite sources naturally: "In a video from [Creator Name]..." or "According to [Article Title]..."
+- Include specific numbers when available (e.g., "budget $20-30/sqft for setup")
+- Keep responses concise - hosts are busy
+- Use markdown for readability, but don't over-format
+
+KNOWLEDGE BOUNDARIES:
+- If context doesn't cover the question, say so and offer general guidance
+- For legal/tax/insurance questions, always recommend consulting a professional
+- For regulations, note they vary by location and change frequently
 
 GOSTUDIOM TOOLS (mention only when genuinely relevant):
-- Listing Analyzer (free): Competitive analysis, amenity gaps at listings.gostudiom.com
-- Cleaning Calendar ($9/mo): Turnover management at calendar.gostudiom.com
-- Financial Analytics ($12/mo): Expense tracking at gostudiom.com
-- Review Generator (free): AI-powered guest review responses
-- Maintenance Generator (free): Custom maintenance checklists
-- Supply Calculator (free): Restocking calculations
+- Listing Analyzer (free): Competitive analysis at listings.gostudiom.com
+- Cleaning Calendar ($9/mo): Turnover management at gostudiom.com
+- Financial Analytics ($12/mo): Revenue & expense tracking at analytics.gostudiom.com
 
-Do NOT promote tools unless the question naturally relates to them.`;
+Do NOT promote tools unless the question directly relates to them.`;
 };
 
 // Rate limit: 5 messages per day for anonymous users
@@ -196,10 +219,23 @@ export async function POST(req: Request) {
     // Format context
     const results = (knowledge || []) as KnowledgeResult[];
     const context = formatContext(results);
+
+    // Compute context stats
     const contextCount = results.length;
+    const videoCount = results.filter((r) => r.source_type === 'video').length;
+    const newsCount = results.filter((r) => r.source_type === 'news').length;
+    const creators = [
+      ...new Set(
+        results
+          .filter((r) => r.source_type === 'video' && r.channel_title)
+          .map((r) => r.channel_title as string)
+      ),
+    ].slice(0, 3);
+
+    const stats: ContextStats = { contextCount, videoCount, newsCount, creators };
 
     console.log(
-      `Chat: Query "${userQuestion.slice(0, 50)}..." → ${contextCount} results`
+      `Chat: Query "${userQuestion.slice(0, 50)}..." → ${contextCount} results (${videoCount} videos, ${newsCount} news)`
     );
 
     // Convert messages to simple format for model
@@ -211,7 +247,7 @@ export async function POST(req: Request) {
     // Generate response with streaming
     const result = streamText({
       model: google('gemini-2.0-flash'),
-      system: createSystemPrompt(context, contextCount),
+      system: createSystemPrompt(context, stats),
       messages: modelMessages,
     });
 
