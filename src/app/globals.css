@@ -1,26 +1,167 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Tailwind v4 theme configuration - GoStudioM teal branding */
+@theme {
+  --color-background: hsl(180 8% 98%);
+  --color-foreground: hsl(222.2 84% 4.9%);
+  --color-card: hsl(180 8% 100%);
+  --color-card-foreground: hsl(222.2 84% 4.9%);
+  --color-popover: hsl(180 8% 100%);
+  --color-popover-foreground: hsl(222.2 84% 4.9%);
+  --color-primary: hsl(177 47% 60%);
+  --color-primary-foreground: hsl(177 47% 10%);
+  --color-secondary: hsl(180 8% 92%);
+  --color-secondary-foreground: hsl(222.2 84% 4.9%);
+  --color-muted: hsl(180 8% 92%);
+  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
+  --color-accent: hsl(195 53% 58%);
+  --color-accent-foreground: hsl(210 40% 98%);
+  --color-destructive: hsl(0 84.2% 60.2%);
+  --color-destructive-foreground: hsl(0 0% 98%);
+  --color-border: hsl(180 8% 90%);
+  --color-input: hsl(180 8% 90%);
+  --color-ring: hsl(195 53% 58%);
+  --radius-lg: 1rem;
+  --radius-md: calc(1rem - 2px);
+  --radius-sm: calc(1rem - 4px);
+
+  /* Chart colors */
+  --color-chart-1: hsl(12 76% 61%);
+  --color-chart-2: hsl(173 58% 39%);
+  --color-chart-3: hsl(197 37% 24%);
+  --color-chart-4: hsl(43 74% 66%);
+  --color-chart-5: hsl(27 87% 67%);
+
+  /* Container configuration - matching GoStudioM apps */
+  --container-xs: 475px;
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1400px;
+
+  /* Sidebar colors */
+  --color-sidebar-background: hsl(0 0% 100%);
+  --color-sidebar-foreground: hsl(240 5.3% 26.1%);
+  --color-sidebar-primary: hsl(177 47% 60%);
+  --color-sidebar-primary-foreground: hsl(177 47% 10%);
+  --color-sidebar-accent: hsl(177 30% 92%);
+  --color-sidebar-accent-foreground: hsl(177 47% 15%);
+  --color-sidebar-border: hsl(0 0% 89.8%);
+  --color-sidebar-ring: hsl(195 53% 58%);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Container utility - matching GoStudioM apps */
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  width: 100%;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @media (min-width: 640px) {
+    max-width: 640px;
+    padding-inline: 2rem;
+  }
+  @media (min-width: 768px) {
+    max-width: 768px;
+    padding-inline: 2rem;
+  }
+  @media (min-width: 1024px) {
+    max-width: 1024px;
+    padding-inline: 4rem;
+  }
+  @media (min-width: 1280px) {
+    max-width: 1280px;
+    padding-inline: 5rem;
+  }
+  @media (min-width: 1400px) {
+    max-width: 1400px;
+    padding-inline: 6rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  :root {
+    /* GoStudioM Brand Colors - for custom CSS usage */
+    --background: 180 8% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 180 8% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 180 8% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 177 47% 60%;
+    --primary-foreground: 177 47% 10%;
+    --secondary: 180 8% 92%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 180 8% 92%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 195 53% 58%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 180 8% 90%;
+    --input: 180 8% 90%;
+    --ring: 195 53% 58%;
+    --radius: 1rem;
+
+    /* Sidebar colors */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 177 47% 60%;
+    --sidebar-primary-foreground: 177 47% 10%;
+    --sidebar-accent: 177 30% 92%;
+    --sidebar-accent-foreground: 177 47% 15%;
+    --sidebar-border: 0 0% 89.8%;
+    --sidebar-ring: 195 53% 58%;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    overscroll-behavior-y: none;
+  }
+
+  /* Prevent text size adjustment on orientation change */
+  * {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+}
+
+/* Gradient backgrounds matching GoStudioM theme (teal) */
+.gradient-bg {
+  background: linear-gradient(135deg, hsl(180 8% 98%) 0%, hsl(177 30% 95%) 100%);
+}
+
+/* Safe area padding for notched devices */
+.safe-area-top { padding-top: env(safe-area-inset-top); }
+.safe-area-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.safe-area-left { padding-left: env(safe-area-inset-left); }
+.safe-area-right { padding-right: env(safe-area-inset-right); }
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glow on hover effect (teal) */
+.glow-on-hover {
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-on-hover:hover {
+  box-shadow: 0 0 20px rgba(94, 189, 181, 0.3);
 }
