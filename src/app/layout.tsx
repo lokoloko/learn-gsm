@@ -12,7 +12,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: {
     template: '%s | Learn STR by GoStudioM',
-    default: 'Learn STR - Knowledge Hub for Short-Term Rental Hosts',
+    default: 'Learn STR by GoStudioM - Knowledge Hub for Short-Term Rental Hosts',
   },
   description:
     'The ultimate knowledge hub for Airbnb and VRBO hosts. Watch curated videos, read industry news, and chat with AI to level up your STR business.',
@@ -44,13 +44,13 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'Learn STR by GoStudioM',
-    title: 'Learn STR - Knowledge Hub for Short-Term Rental Hosts',
+    title: 'Learn STR by GoStudioM - Knowledge Hub for Short-Term Rental Hosts',
     description:
       'The ultimate knowledge hub for Airbnb and VRBO hosts. Watch curated videos, read industry news, and chat with AI.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Learn STR - Knowledge Hub for Short-Term Rental Hosts',
+    title: 'Learn STR by GoStudioM - Knowledge Hub for Short-Term Rental Hosts',
     description:
       'The ultimate knowledge hub for Airbnb and VRBO hosts. Watch curated videos, read industry news, and chat with AI.',
   },
