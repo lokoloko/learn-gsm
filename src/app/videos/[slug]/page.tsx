@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Clock, Eye, Star, Calendar, User, Lightbulb, CheckSquare, Wrench, AlertTriangle, BookOpen } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { VideoCard } from '@/components/cards';
 import { createClient } from '@/lib/supabase-server';
@@ -207,26 +208,8 @@ export default async function VideoDetailPage({ params }: PageProps) {
 
           {/* Channel */}
           {channel && (
-            <div className="flex items-center gap-3 mb-6 p-4 rounded-lg bg-muted/50">
-              {channel.thumbnail_url ? (
-                <Image
-                  src={channel.thumbnail_url}
-                  alt={channel.title || 'Channel'}
-                  width={48}
-                  height={48}
-                  className="rounded-full"
-                />
-              ) : (
-                <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-lg font-semibold">
-                  {channel.title?.[0] || 'C'}
-                </div>
-              )}
-              <div>
-                <p className="font-medium">{channel.title}</p>
-                {channel.handle && (
-                  <p className="text-sm text-muted-foreground">@{channel.handle.replace('@', '')}</p>
-                )}
-              </div>
+            <div className="mb-6 p-4 rounded-lg bg-muted/50">
+              <p className="font-medium">{channel.title}</p>
             </div>
           )}
 
@@ -254,6 +237,15 @@ export default async function VideoDetailPage({ params }: PageProps) {
             <div className="mb-8">
               <h2 className="text-lg font-semibold mb-3">Summary</h2>
               <p className="text-muted-foreground whitespace-pre-wrap">{video.summary}</p>
+              <a
+                href={`https://www.youtube.com/watch?v=${video.youtube_video_id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" className="mt-4">
+                  Watch on YouTube
+                </Button>
+              </a>
             </div>
           )}
 
