@@ -16,14 +16,6 @@ export const metadata: Metadata = {
   },
   description:
     'The ultimate knowledge hub for Airbnb and VRBO hosts. Watch curated videos, read industry news, and chat with AI to level up your STR business.',
-  icons: {
-    icon: [
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-    ],
-    apple: '/apple-touch-icon.png',
-  },
-  manifest: '/site.webmanifest',
   keywords: [
     'Airbnb',
     'VRBO',
@@ -74,6 +66,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.className}>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+      </head>
       <body className="min-h-screen flex flex-col antialiased">
         <Header />
         <main className="flex-1">{children}</main>
