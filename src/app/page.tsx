@@ -49,7 +49,7 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="gradient-bg py-16 lg:py-24">
+      <section className="gradient-bg py-12 lg:py-16">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
@@ -84,7 +84,7 @@ export default async function HomePage() {
 
       {/* Trending News */}
       {news.length > 0 && (
-        <section className="py-12 lg:py-16">
+        <section className="py-8 lg:py-12">
           <div className="container">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold">Trending News</h2>
@@ -106,7 +106,7 @@ export default async function HomePage() {
 
       {/* Popular Videos */}
       {videos.length > 0 && (
-        <section className="py-12 lg:py-16 bg-muted/30">
+        <section className="py-8 lg:py-12 bg-muted/30">
           <div className="container">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold">Popular Videos</h2>
@@ -127,7 +127,7 @@ export default async function HomePage() {
       )}
 
       {/* Browse by Topic */}
-      <section className="py-12 lg:py-16">
+      <section className="py-8 lg:py-12">
         <div className="container">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold">Browse by Topic</h2>
@@ -147,7 +147,7 @@ export default async function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 lg:py-24 gradient-bg">
+      <section className="py-12 lg:py-16 gradient-bg">
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4">
