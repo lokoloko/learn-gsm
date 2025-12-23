@@ -66,14 +66,9 @@ export function VideoCard({ video, showChannel = true }: VideoCardProps) {
 
         {/* Channel */}
         {showChannel && video.channel_title && (
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center text-xs font-medium">
-              {video.channel_title[0]}
-            </div>
-            <span className="text-xs text-muted-foreground truncate">
-              {video.channel_title}
-            </span>
-          </div>
+          <p className="text-xs text-muted-foreground truncate mb-2">
+            {video.channel_title}
+          </p>
         )}
 
         {/* Meta */}
