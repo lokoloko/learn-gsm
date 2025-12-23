@@ -3,13 +3,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Menu, X, PlayCircle, Newspaper, Grid3X3, MessageCircle } from 'lucide-react';
+import { Menu, X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navigation = [
-  { name: 'Videos', href: '/videos', icon: PlayCircle },
-  { name: 'News', href: '/news', icon: Newspaper },
-  { name: 'Topics', href: '/topics', icon: Grid3X3 },
+  { name: 'Videos', href: '/videos' },
+  { name: 'News', href: '/news' },
+  { name: 'Topics', href: '/topics' },
 ];
 
 export function Header() {
@@ -38,9 +38,8 @@ export function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted"
+              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted"
             >
-              <item.icon className="h-4 w-4" />
               {item.name}
             </Link>
           ))}
@@ -79,10 +78,9 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
+                className="block px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <item.icon className="h-5 w-5" />
                 {item.name}
               </Link>
             ))}
