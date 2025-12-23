@@ -5,6 +5,9 @@ import { ALL_CATEGORY_SLUGS } from '@/lib/utils/categories';
 // Allow up to 60 seconds for sitemap generation (pagination + large dataset)
 export const maxDuration = 60;
 
+// Cache sitemap for 1 hour (ISR) - balances freshness with performance
+export const revalidate = 3600;
+
 // Trim any trailing whitespace from env variable
 const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://learn.gostudiom.com').trim();
 
