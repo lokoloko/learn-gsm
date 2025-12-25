@@ -92,6 +92,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
+    {
+      url: `${BASE_URL}/regulations`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
   ];
 
   // Topic pages
@@ -139,8 +145,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  const totalUrls = staticPages.length + topicPages.length + videoPages.length + newsPages.length;
-  console.log(`[Sitemap] Generated ${totalUrls} URLs: ${staticPages.length} static, ${topicPages.length} topics, ${videoPages.length} videos, ${newsPages.length} news`);
+  // Regulation pages - all covered jurisdictions
+  type JurisdictionRow = { slug: string; updated_at: string | null };
+  const jurisdictions = await fetchAllRows<JurisdictionRow>(
+    supabase,
+    'jurisdictions',
+    'slug, updated_at',
+    [{ column: 'coverage_status', value: 'covered' }],
+    { column: 'population', ascending: false }
+  );
 
-  return [...staticPages, ...topicPages, ...videoPages, ...newsPages];
+  const regulationPages: MetadataRoute.Sitemap = jurisdictions.map((jur) => ({
+    url: `${BASE_URL}/regulations/${jur.slug}`,
+    lastModified: jur.updated_at ? new Date(jur.updated_at) : new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
+  const totalUrls = staticPages.length + topicPages.length + videoPages.length + newsPages.length + regulationPages.length;
+  console.log(`[Sitemap] Generated ${totalUrls} URLs: ${staticPages.length} static, ${topicPages.length} topics, ${videoPages.length} videos, ${newsPages.length} news, ${regulationPages.length} regulations`);
+
+  return [...staticPages, ...topicPages, ...videoPages, ...newsPages, ...regulationPages];
 }

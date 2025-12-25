@@ -30,9 +30,57 @@ import type {
   JurisdictionForDirectory,
 } from '@/types/database';
 import { formatDistanceToNow } from 'date-fns';
+import type { StrictnessLevel } from '@/lib/utils/regulations';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+// Generate JSON-LD structured data for SEO
+function generateJsonLd(
+  jurisdiction: Jurisdiction,
+  regulation: Regulation | null,
+  strictness: StrictnessLevel
+) {
+  const fee =
+    regulation?.registration?.city?.fee ||
+    regulation?.registration?.county?.fee ||
+    null;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'GovernmentService',
+    name: `${jurisdiction.name} Short-Term Rental Regulations`,
+    description:
+      regulation?.summary ||
+      `Short-term rental regulations for ${jurisdiction.name}, ${jurisdiction.state_name}`,
+    serviceType: 'Short-Term Rental Licensing',
+    areaServed: {
+      '@type': jurisdiction.jurisdiction_type === 'city' ? 'City' : 'AdministrativeArea',
+      name: jurisdiction.name,
+      containedInPlace: {
+        '@type': 'State',
+        name: jurisdiction.state_name,
+      },
+    },
+    provider: {
+      '@type': 'GovernmentOrganization',
+      name: `${jurisdiction.name} ${jurisdiction.jurisdiction_type === 'city' ? 'City' : 'County'} Government`,
+    },
+    ...(fee && {
+      offers: {
+        '@type': 'Offer',
+        price: fee,
+        priceCurrency: 'USD',
+        description: 'STR Permit/License Fee',
+      },
+    }),
+    additionalProperty: {
+      '@type': 'PropertyValue',
+      name: 'Regulation Strictness',
+      value: strictness,
+    },
+  };
 }
 
 // Revalidate every hour
@@ -175,8 +223,17 @@ export default async function RegulationDetailPage({ params }: PageProps) {
   };
 
   return (
-    <div className="container py-8 lg:py-12">
-      {/* Breadcrumb */}
+    <>
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateJsonLd(jurisdiction, regulation, strictness)),
+        }}
+      />
+
+      <div className="container py-8 lg:py-12">
+        {/* Breadcrumb */}
       <div className="mb-6">
         <Link href="/regulations">
           <Button variant="ghost" size="sm" className="gap-2 -ml-2">
@@ -375,6 +432,7 @@ export default async function RegulationDetailPage({ params }: PageProps) {
           )}
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }
