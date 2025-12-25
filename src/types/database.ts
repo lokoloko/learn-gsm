@@ -374,6 +374,17 @@ export interface InsuranceData {
   notes: string | null;
 }
 
+// Application step for Pro-only permit guide
+export interface ApplicationStep {
+  step: number;
+  title: string;
+  description: string;
+  url: string | null;
+  documents_needed: string[] | null;
+  estimated_time: string | null;
+  cost: number | null;
+}
+
 // Main Regulation interface
 export interface Regulation {
   id: string;
@@ -390,6 +401,8 @@ export interface Regulation {
   penalties: PenaltiesData | null;
   exemptions: ExemptionsData | null;
   preemption: PreemptionData | null;
+  application_steps: ApplicationStep[] | null;
+  key_gotchas: string[] | null;
   effective_date: string | null;
   last_amended: string | null;
   next_review_date: string | null;

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, Calendar, MapPin, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Calendar, MapPin, AlertCircle, AlertTriangle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -11,11 +11,17 @@ import { AtAGlance } from '@/components/regulations/AtAGlance';
 import { KnowledgeSection } from '@/components/regulations/KnowledgeSection';
 import { SourcesList } from '@/components/regulations/SourcesList';
 import { RelatedContent } from '@/components/regulations/RelatedContent';
+import { ApplicationSteps } from '@/components/regulations/ApplicationSteps';
+import { LockedContent } from '@/components/regulations/LockedContent';
 import { MarketCard } from '@/components/cards';
 import {
   deriveStrictness,
   formatConfidence,
 } from '@/lib/utils/regulations';
+import {
+  getRegulationAccess,
+  canAccessMarket,
+} from '@/lib/auth/get-user-tier';
 import type {
   Jurisdiction,
   Regulation,
@@ -145,14 +151,28 @@ export default async function RegulationDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const [regulation, knowledge, sources, relatedMarkets] = await Promise.all([
-    getRegulation(jurisdiction.id),
-    getKnowledge(jurisdiction.id),
-    getSources(jurisdiction.id),
-    getRelatedMarkets(jurisdiction.state_code, jurisdiction.id),
-  ]);
+  const [regulation, knowledge, sources, relatedMarkets, access] =
+    await Promise.all([
+      getRegulation(jurisdiction.id),
+      getKnowledge(jurisdiction.id),
+      getSources(jurisdiction.id),
+      getRelatedMarkets(jurisdiction.state_code, jurisdiction.id),
+      getRegulationAccess(),
+    ]);
 
   const strictness = regulation ? deriveStrictness(regulation) : 'permissive';
+
+  // Check if this user can access full content for this market
+  const hasMarketAccess = canAccessMarket(access, slug);
+  const canSeeFullContent = access.canViewFullContent && hasMarketAccess;
+  const canSeeApplicationSteps = access.canViewApplicationSteps;
+
+  // Determine lock type for gated content
+  const getLockType = (): 'signup' | 'upgrade' | 'market-limit' => {
+    if (access.tier === 'public') return 'signup';
+    if (!hasMarketAccess) return 'market-limit';
+    return 'upgrade';
+  };
 
   return (
     <div className="container py-8 lg:py-12">
@@ -223,8 +243,77 @@ export default async function RegulationDetailPage({ params }: PageProps) {
           {/* At A Glance */}
           {regulation && <AtAGlance regulation={regulation} />}
 
-          {/* Knowledge Items */}
-          {knowledge.length > 0 && <KnowledgeSection items={knowledge} />}
+          {/* Key Gotchas (count visible to all, content to free+) */}
+          {regulation?.key_gotchas && regulation.key_gotchas.length > 0 && (
+            <Card>
+              <CardContent className="pt-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <AlertTriangle className="h-5 w-5 text-amber-500" />
+                  <h2 className="text-lg font-semibold">
+                    {regulation.key_gotchas.length} Things Hosts Often Miss
+                  </h2>
+                </div>
+                {canSeeFullContent ? (
+                  <ul className="space-y-2">
+                    {regulation.key_gotchas.map((gotcha, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-start gap-2 text-muted-foreground"
+                      >
+                        <span className="font-medium text-amber-600 dark:text-amber-400">
+                          {idx + 1}.
+                        </span>
+                        {gotcha}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <LockedContent
+                    type={getLockType()}
+                    featureLabel="Key Gotchas"
+                    marketName={jurisdiction.name}
+                  />
+                )}
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Knowledge Items - free+ only */}
+          {knowledge.length > 0 && (
+            canSeeFullContent ? (
+              <KnowledgeSection items={knowledge} />
+            ) : (
+              <LockedContent
+                type={getLockType()}
+                featureLabel="Full Regulation Details"
+                marketName={jurisdiction.name}
+              />
+            )
+          )}
+
+          {/* Application Steps - Pro only */}
+          {regulation?.application_steps &&
+            regulation.application_steps.length > 0 && (
+              canSeeApplicationSteps ? (
+                <ApplicationSteps
+                  steps={regulation.application_steps}
+                  marketName={jurisdiction.name}
+                />
+              ) : (
+                <Card>
+                  <CardContent className="pt-6">
+                    <h2 className="text-lg font-semibold mb-4">
+                      Step-by-Step Application Guide
+                    </h2>
+                    <LockedContent
+                      type="upgrade"
+                      featureLabel={`${regulation.application_steps.length}-Step Application Guide`}
+                      marketName={jurisdiction.name}
+                    />
+                  </CardContent>
+                </Card>
+              )
+            )}
 
           {/* Disclaimer */}
           <Card className="border-amber-200 dark:border-amber-900 bg-amber-50/50 dark:bg-amber-900/10">
@@ -249,8 +338,24 @@ export default async function RegulationDetailPage({ params }: PageProps) {
 
         {/* Sidebar */}
         <div className="space-y-6">
-          {/* Sources */}
-          {sources.length > 0 && <SourcesList sources={sources} />}
+          {/* Sources - free+ only */}
+          {sources.length > 0 && (
+            canSeeFullContent ? (
+              <SourcesList sources={sources} />
+            ) : (
+              <Card>
+                <CardContent className="pt-6">
+                  <h3 className="text-lg font-semibold mb-4">Official Sources</h3>
+                  <LockedContent
+                    type={getLockType()}
+                    featureLabel={`${sources.length} Official Sources`}
+                    marketName={jurisdiction.name}
+                    className="py-4"
+                  />
+                </CardContent>
+              </Card>
+            )
+          )}
 
           {/* Related Content */}
           <RelatedContent jurisdictionName={jurisdiction.name} />
