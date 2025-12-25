@@ -1,0 +1,275 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { ArrowLeft, Calendar, MapPin, AlertCircle } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { createClient } from '@/lib/supabase-server';
+import { StrictnessBadge } from '@/components/regulations/StrictnessBadge';
+import { AtAGlance } from '@/components/regulations/AtAGlance';
+import { KnowledgeSection } from '@/components/regulations/KnowledgeSection';
+import { SourcesList } from '@/components/regulations/SourcesList';
+import { RelatedContent } from '@/components/regulations/RelatedContent';
+import { MarketCard } from '@/components/cards';
+import {
+  deriveStrictness,
+  formatConfidence,
+} from '@/lib/utils/regulations';
+import type {
+  Jurisdiction,
+  Regulation,
+  RegulationKnowledge,
+  RegulationSource,
+  JurisdictionForDirectory,
+} from '@/types/database';
+import { formatDistanceToNow } from 'date-fns';
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+// Revalidate every hour
+export const revalidate = 3600;
+
+async function getJurisdiction(slug: string): Promise<Jurisdiction | null> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('jurisdictions')
+    .select('*')
+    .eq('slug', slug)
+    .eq('coverage_status', 'covered')
+    .single();
+
+  if (error || !data) return null;
+  return data as Jurisdiction;
+}
+
+async function getRegulation(jurisdictionId: string): Promise<Regulation | null> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('regulations')
+    .select('*')
+    .eq('jurisdiction_id', jurisdictionId)
+    .single();
+
+  if (error || !data) return null;
+  return data as Regulation;
+}
+
+async function getKnowledge(jurisdictionId: string): Promise<RegulationKnowledge[]> {
+  const supabase = await createClient();
+
+  const { data } = await supabase
+    .from('regulations_knowledge')
+    .select('*')
+    .eq('jurisdiction_id', jurisdictionId)
+    .order('knowledge_type');
+
+  return (data || []) as RegulationKnowledge[];
+}
+
+async function getSources(jurisdictionId: string): Promise<RegulationSource[]> {
+  const supabase = await createClient();
+
+  const { data } = await supabase
+    .from('regulation_sources')
+    .select('*')
+    .eq('jurisdiction_id', jurisdictionId)
+    .eq('status', 'active');
+
+  return (data || []) as RegulationSource[];
+}
+
+async function getRelatedMarkets(
+  stateCode: string,
+  excludeId: string
+): Promise<JurisdictionForDirectory[]> {
+  const supabase = await createClient();
+
+  const { data } = await supabase
+    .from('jurisdictions')
+    .select(`
+      id, slug, name, full_name, state_code, state_name,
+      jurisdiction_type, population,
+      regulations (
+        summary, confidence_score, status,
+        registration, eligibility, limits, taxes, penalties,
+        updated_at
+      )
+    `)
+    .eq('coverage_status', 'covered')
+    .eq('state_code', stateCode)
+    .neq('id', excludeId)
+    .order('population', { ascending: false })
+    .limit(4);
+
+  return (data || []).map((item) => ({
+    ...item,
+    regulation: item.regulations?.[0] || null,
+  })) as unknown as JurisdictionForDirectory[];
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const jurisdiction = await getJurisdiction(slug);
+
+  if (!jurisdiction) {
+    return { title: 'Market Not Found' };
+  }
+
+  const regulation = await getRegulation(jurisdiction.id);
+
+  return {
+    title: `${jurisdiction.name} STR Regulations`,
+    description:
+      regulation?.summary ||
+      `Short-term rental regulations, Airbnb rules, and permit requirements for ${jurisdiction.name}, ${jurisdiction.state_name}.`,
+    openGraph: {
+      title: `${jurisdiction.name} STR Regulations | Learn STR`,
+      description:
+        regulation?.summary ||
+        `Complete guide to STR rules in ${jurisdiction.name}`,
+      type: 'article',
+    },
+  };
+}
+
+export default async function RegulationDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  const jurisdiction = await getJurisdiction(slug);
+
+  if (!jurisdiction) {
+    notFound();
+  }
+
+  const [regulation, knowledge, sources, relatedMarkets] = await Promise.all([
+    getRegulation(jurisdiction.id),
+    getKnowledge(jurisdiction.id),
+    getSources(jurisdiction.id),
+    getRelatedMarkets(jurisdiction.state_code, jurisdiction.id),
+  ]);
+
+  const strictness = regulation ? deriveStrictness(regulation) : 'permissive';
+
+  return (
+    <div className="container py-8 lg:py-12">
+      {/* Breadcrumb */}
+      <div className="mb-6">
+        <Link href="/regulations">
+          <Button variant="ghost" size="sm" className="gap-2 -ml-2">
+            <ArrowLeft className="h-4 w-4" />
+            All Markets
+          </Button>
+        </Link>
+      </div>
+
+      <div className="grid lg:grid-cols-3 gap-8">
+        {/* Main Content */}
+        <div className="lg:col-span-2 space-y-8">
+          {/* Header */}
+          <div>
+            <div className="flex flex-wrap items-center gap-3 mb-2">
+              <h1 className="text-3xl font-bold">{jurisdiction.name}</h1>
+              <StrictnessBadge level={strictness} size="md" />
+            </div>
+            <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+              <span className="flex items-center gap-1">
+                <MapPin className="h-4 w-4" />
+                {jurisdiction.state_name}
+              </span>
+              {regulation?.updated_at && (
+                <span className="flex items-center gap-1">
+                  <Calendar className="h-4 w-4" />
+                  Updated{' '}
+                  {formatDistanceToNow(new Date(regulation.updated_at), {
+                    addSuffix: true,
+                  })}
+                </span>
+              )}
+              {regulation?.confidence_score != null && (
+                <Badge variant="outline" className="text-xs">
+                  {formatConfidence(regulation.confidence_score)} confidence
+                </Badge>
+              )}
+            </div>
+          </div>
+
+          {/* Summary */}
+          {regulation?.summary && (
+            <Card>
+              <CardContent className="pt-6">
+                <p className="text-muted-foreground leading-relaxed">
+                  {regulation.summary}
+                </p>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Plain English */}
+          {regulation?.plain_english && (
+            <Card>
+              <CardContent className="pt-6">
+                <h2 className="text-lg font-semibold mb-3">In Plain English</h2>
+                <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
+                  {regulation.plain_english}
+                </p>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* At A Glance */}
+          {regulation && <AtAGlance regulation={regulation} />}
+
+          {/* Knowledge Items */}
+          {knowledge.length > 0 && <KnowledgeSection items={knowledge} />}
+
+          {/* Disclaimer */}
+          <Card className="border-amber-200 dark:border-amber-900 bg-amber-50/50 dark:bg-amber-900/10">
+            <CardContent className="pt-6">
+              <div className="flex gap-3">
+                <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+                <div className="text-sm">
+                  <p className="font-medium text-amber-800 dark:text-amber-300 mb-1">
+                    Disclaimer
+                  </p>
+                  <p className="text-amber-700 dark:text-amber-400/80">
+                    This information is for general guidance only and should not
+                    be considered legal advice. Regulations change frequently.
+                    Always verify current requirements with local government
+                    authorities before operating a short-term rental.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Sidebar */}
+        <div className="space-y-6">
+          {/* Sources */}
+          {sources.length > 0 && <SourcesList sources={sources} />}
+
+          {/* Related Content */}
+          <RelatedContent jurisdictionName={jurisdiction.name} />
+
+          {/* Related Markets */}
+          {relatedMarkets.length > 0 && (
+            <div>
+              <h3 className="text-lg font-semibold mb-4">
+                Other {jurisdiction.state_name} Markets
+              </h3>
+              <div className="space-y-4">
+                {relatedMarkets.map((market) => (
+                  <MarketCard key={market.id} market={market} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
