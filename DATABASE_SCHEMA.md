@@ -2,6 +2,15 @@
 
 This document describes the Supabase tables used by Learn STR. These tables are part of a shared GoStudioM Supabase instance.
 
+## Quick Reference
+
+| Domain | Tables | Records |
+|--------|--------|---------|
+| Videos | `videos_channels`, `videos_parsed`, `videos_knowledge` | 100k+ knowledge items |
+| News | `news_sources`, `news_articles`, `news_knowledge` | 6k+ knowledge items |
+| Regulations | `jurisdictions`, `regulations`, `regulations_knowledge`, `regulation_sources` | 120+ markets, 15k+ knowledge items |
+| Auth | `profiles`, `user_settings` | Shared with GoStudioM apps |
+
 ## Enums
 
 ### videos_category
@@ -38,6 +47,36 @@ This document describes the Supabase tables used by Learn STR. These tables are 
 ### news_source_category
 ```
 'industry' | 'platform' | 'mainstream' | 'creator' | 'real_estate' | 'travel'
+```
+
+### jurisdiction_type
+```
+'city' | 'county'
+```
+
+### coverage_status
+```
+'covered' | 'pending' | 'research' | 'not_applicable'
+```
+
+### regulation_status
+```
+'draft' | 'published' | 'archived'
+```
+
+### regulation_knowledge_type
+```
+'eligibility' | 'requirement' | 'fee' | 'limit' | 'tax' | 'penalty' | 'safety' | 'exemption' | 'process' | 'gotcha'
+```
+
+### subscription_tier (profiles)
+```
+'free' | 'starter' | 'pro'
+```
+
+### subscription_status (profiles)
+```
+'active' | 'canceled' | 'past_due' | 'trialing'
 ```
 
 ## Tables
@@ -273,7 +312,11 @@ STR regulation details for each jurisdiction.
 | created_at | timestamptz | YES | now() | |
 | updated_at | timestamptz | YES | now() | |
 
-**JSONB field structure (city/county nesting):**
+**JSONB field structures:**
+
+All JSONB fields use city/county nesting pattern:
+
+**registration:**
 ```json
 {
   "city": {
@@ -284,13 +327,59 @@ STR regulation details for each jurisdiction.
     "required_documents": ["ID", "Proof of ownership"],
     "renewal_period": "annual"
   },
-  "county": {
-    "required": false
+  "county": { "required": false }
+}
+```
+
+**eligibility:**
+```json
+{
+  "city": {
+    "primary_residence_required": true,
+    "owner_occupied": false,
+    "property_types_allowed": ["single_family", "condo"],
+    "zones_allowed": ["R1", "R2", "MU"]
   }
 }
 ```
 
-**application_steps JSONB array:**
+**limits:**
+```json
+{
+  "city": {
+    "max_nights_per_year": 90,
+    "max_guests": 10,
+    "min_stay_nights": 2,
+    "max_properties_per_owner": 1
+  }
+}
+```
+
+**taxes:**
+```json
+{
+  "city": {
+    "total_rate": "13.5%",
+    "transient_occupancy_tax": 12,
+    "tourism_fee": 1.5
+  },
+  "state": { "sales_tax": 6 }
+}
+```
+
+**penalties:**
+```json
+{
+  "city": {
+    "first_offense": 1000,
+    "max_fine": 15000,
+    "daily_fine": 500,
+    "can_revoke_license": true
+  }
+}
+```
+
+**application_steps (Pro only):**
 ```json
 [
   {
@@ -302,6 +391,15 @@ STR regulation details for each jurisdiction.
     "estimated_time": "1 day",
     "cost": 0
   }
+]
+```
+
+**key_gotchas (text array):**
+```json
+[
+  "ADUs are prohibited even if main home is eligible",
+  "Must display permit number in listing",
+  "Fire inspection required BEFORE permit approval"
 ]
 ```
 
@@ -359,6 +457,30 @@ Official government sources for regulations.
 **Key filters for display:**
 - `status = 'active'` - Only show active sources
 
+## Auth Tables
+
+### profiles
+
+User profiles with subscription information. Shared across all GoStudioM apps.
+
+| Column | Type | Nullable | Default | Description |
+|--------|------|----------|---------|-------------|
+| id | uuid | NO | | Primary key (matches auth.users.id) |
+| email | text | YES | | User email |
+| full_name | text | YES | | Display name |
+| avatar_url | text | YES | | Profile image |
+| subscription_tier | text | YES | 'free' | 'free', 'starter', 'pro' |
+| subscription_status | text | YES | | 'active', 'canceled', 'past_due', 'trialing' |
+| subscription_ends_at | timestamptz | YES | | When subscription expires |
+| stripe_customer_id | text | YES | | Stripe customer ID |
+| created_at | timestamptz | YES | now() | |
+| updated_at | timestamptz | YES | now() | |
+
+**Access tier logic for regulations:**
+- `public` - No session (SEO layer only)
+- `free` - Logged in, `subscription_tier = 'free'` (one market)
+- `pro` - `subscription_tier` in `['starter', 'pro']` AND `subscription_status = 'active'` (all markets + steps)
+
 ### user_settings
 
 User preferences including free user's selected regulation market.
@@ -372,6 +494,8 @@ User preferences including free user's selected regulation market.
 | updated_at | timestamptz | YES | now() | |
 
 **Unique constraint:** `user_id`
+
+**Usage:** Free users can view full regulation details for ONE market. When they first view a market's details, they're prompted to select it. The slug is stored here.
 
 ---
 
