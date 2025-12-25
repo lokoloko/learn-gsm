@@ -15,6 +15,8 @@ import {
   getPermitName,
   getProcessingTime,
   getRequiredDocuments,
+  truncateSummary,
+  areSTRsAllowed,
   STRICTNESS_META,
   STATE_NAMES,
   type StrictnessLevel,
@@ -424,6 +426,82 @@ describe('regulations utility', () => {
 
     it('should return empty array for null', () => {
       expect(getRequiredDocuments(null)).toEqual([]);
+    });
+  });
+
+  describe('truncateSummary()', () => {
+    it('should return null for null input', () => {
+      expect(truncateSummary(null)).toBeNull();
+    });
+
+    it('should return short text as-is', () => {
+      const short = 'This is a short summary.';
+      expect(truncateSummary(short)).toBe(short);
+    });
+
+    it('should truncate at sentence boundary when possible', () => {
+      const long = 'First sentence here. Second sentence here. Third sentence with more content that goes over the limit.';
+      const result = truncateSummary(long, 50);
+      expect(result).toBe('First sentence here. Second sentence here.');
+    });
+
+    it('should truncate at word boundary with ellipsis when no sentence fits', () => {
+      const long = 'This is a very long sentence that has no periods and goes on and on and on without any sentence breaks whatsoever';
+      const result = truncateSummary(long, 50);
+      expect(result).toContain('...');
+      expect(result!.length).toBeLessThanOrEqual(55); // 50 + ellipsis allowance
+    });
+
+    it('should respect custom maxLength', () => {
+      const text = 'Short. Medium length. Longer sentence here.';
+      expect(truncateSummary(text, 20)).toBe('Short.');
+    });
+  });
+
+  describe('areSTRsAllowed()', () => {
+    it('should return true for null regulation', () => {
+      expect(areSTRsAllowed(null)).toBe(true);
+    });
+
+    it('should return true when no prohibition indicators', () => {
+      const regulation: Partial<Regulation> = {
+        registration: {
+          city: { required: true, fee: 500 },
+        },
+      };
+      expect(areSTRsAllowed(regulation)).toBe(true);
+    });
+
+    it('should return false when status is prohibited', () => {
+      const regulation: Partial<Regulation> = {
+        status: 'prohibited',
+      };
+      expect(areSTRsAllowed(regulation)).toBe(false);
+    });
+
+    it('should return false when status is banned', () => {
+      const regulation: Partial<Regulation> = {
+        status: 'banned',
+      };
+      expect(areSTRsAllowed(regulation)).toBe(false);
+    });
+
+    it('should return false when city registration says not allowed', () => {
+      const regulation: Partial<Regulation> = {
+        registration: {
+          city: { allowed: false },
+        },
+      };
+      expect(areSTRsAllowed(regulation)).toBe(false);
+    });
+
+    it('should return false when county registration says not allowed', () => {
+      const regulation: Partial<Regulation> = {
+        registration: {
+          county: { allowed: false },
+        },
+      };
+      expect(areSTRsAllowed(regulation)).toBe(false);
     });
   });
 });

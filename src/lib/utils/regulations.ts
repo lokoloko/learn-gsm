@@ -332,6 +332,66 @@ export function formatConfidence(score: number | null): string {
 }
 
 /**
+ * Truncate summary for public tier (1-2 sentences).
+ * Attempts to find sentence boundaries for clean truncation.
+ */
+export function truncateSummary(summary: string | null, maxLength: number = 150): string | null {
+  if (!summary) return null;
+
+  // If already short enough, return as-is
+  if (summary.length <= maxLength) return summary;
+
+  // Try to truncate at sentence boundary
+  const sentences = summary.match(/[^.!?]+[.!?]+/g) || [];
+
+  let result = '';
+  for (const sentence of sentences) {
+    if ((result + sentence).length <= maxLength) {
+      result += sentence;
+    } else {
+      break;
+    }
+  }
+
+  // If we got at least one sentence, use it
+  if (result.length > 0) {
+    return result.trim();
+  }
+
+  // Fallback: truncate at word boundary
+  const truncated = summary.slice(0, maxLength);
+  const lastSpace = truncated.lastIndexOf(' ');
+  if (lastSpace > maxLength * 0.7) {
+    return truncated.slice(0, lastSpace) + '...';
+  }
+
+  return truncated + '...';
+}
+
+/**
+ * Check if STRs are allowed in this jurisdiction.
+ * Returns false if explicitly prohibited, true otherwise.
+ */
+export function areSTRsAllowed(regulation: Partial<Regulation> | null): boolean {
+  if (!regulation) return true; // Assume allowed if no data
+
+  // Check if status indicates prohibition
+  if (regulation.status === 'prohibited' || regulation.status === 'banned') {
+    return false;
+  }
+
+  // Check if registration explicitly says not allowed
+  if (
+    regulation.registration?.city?.allowed === false ||
+    regulation.registration?.county?.allowed === false
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+/**
  * Get permit/license name or default.
  */
 export function getPermitName(registration: RegistrationData | null): string {

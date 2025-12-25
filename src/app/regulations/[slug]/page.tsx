@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, Calendar, MapPin, AlertCircle, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Calendar, MapPin, AlertCircle, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -17,6 +17,8 @@ import { MarketCard } from '@/components/cards';
 import {
   deriveStrictness,
   formatConfidence,
+  truncateSummary,
+  areSTRsAllowed,
 } from '@/lib/utils/regulations';
 import {
   getRegulationAccess,
@@ -251,6 +253,20 @@ export default async function RegulationDetailPage({ params }: PageProps) {
             <div className="flex flex-wrap items-center gap-3 mb-2">
               <h1 className="text-3xl font-bold">{jurisdiction.name}</h1>
               <StrictnessBadge level={strictness} size="md" />
+              {/* STRs Allowed/Prohibited status - visible to all */}
+              {regulation && (
+                areSTRsAllowed(regulation) ? (
+                  <Badge variant="outline" className="gap-1 text-green-700 border-green-300 dark:text-green-400 dark:border-green-800">
+                    <CheckCircle className="h-3 w-3" />
+                    STRs Allowed
+                  </Badge>
+                ) : (
+                  <Badge variant="outline" className="gap-1 text-red-700 border-red-300 dark:text-red-400 dark:border-red-800">
+                    <XCircle className="h-3 w-3" />
+                    STRs Prohibited
+                  </Badge>
+                )
+              )}
             </div>
             <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-1">
@@ -274,25 +290,40 @@ export default async function RegulationDetailPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Summary */}
+          {/* Summary - truncated for public, full for authenticated */}
           {regulation?.summary && (
             <Card>
               <CardContent className="pt-6">
                 <p className="text-muted-foreground leading-relaxed">
-                  {regulation.summary}
+                  {canSeeFullContent
+                    ? regulation.summary
+                    : truncateSummary(regulation.summary)}
                 </p>
+                {!canSeeFullContent && regulation.summary.length > 150 && (
+                  <p className="text-sm text-muted-foreground/70 mt-2 italic">
+                    Sign up free to read the full summary...
+                  </p>
+                )}
               </CardContent>
             </Card>
           )}
 
-          {/* Plain English */}
+          {/* Plain English - authenticated+ only */}
           {regulation?.plain_english && (
             <Card>
               <CardContent className="pt-6">
                 <h2 className="text-lg font-semibold mb-3">In Plain English</h2>
-                <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
-                  {regulation.plain_english}
-                </p>
+                {canSeeFullContent ? (
+                  <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
+                    {regulation.plain_english}
+                  </p>
+                ) : (
+                  <LockedContent
+                    type={getLockType()}
+                    featureLabel="Plain English Guide"
+                    marketName={jurisdiction.name}
+                  />
+                )}
               </CardContent>
             </Card>
           )}
