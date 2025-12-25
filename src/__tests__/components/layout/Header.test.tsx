@@ -11,6 +11,7 @@ describe('Header component', () => {
     render(<Header />);
     expect(screen.getByRole('link', { name: /videos/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /news/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /^rules$/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /topics/i })).toBeInTheDocument();
   });
 
@@ -18,6 +19,7 @@ describe('Header component', () => {
     render(<Header />);
     expect(screen.getByRole('link', { name: /videos/i })).toHaveAttribute('href', '/videos');
     expect(screen.getByRole('link', { name: /news/i })).toHaveAttribute('href', '/news');
+    expect(screen.getByRole('link', { name: /^rules$/i })).toHaveAttribute('href', '/regulations');
     expect(screen.getByRole('link', { name: /topics/i })).toHaveAttribute('href', '/topics');
   });
 

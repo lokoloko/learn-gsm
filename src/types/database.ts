@@ -192,3 +192,293 @@ export function getVideoUrl(video: Pick<VideoWithChannel, 'youtube_video_id'>): 
 export function getNewsUrl(article: Pick<NewsArticle, 'slug' | 'id'>): string {
   return `/news/${article.slug || article.id}`;
 }
+
+// ============================================================================
+// REGULATIONS TYPES
+// ============================================================================
+
+export type JurisdictionType = 'city' | 'county' | 'state';
+export type CoverageStatus = 'none' | 'pending' | 'covered' | 'needs_update';
+export type RegulationStatus = 'draft' | 'published' | 'archived';
+
+export type RegulationKnowledgeType =
+  | 'eligibility'
+  | 'exemption'
+  | 'fee'
+  | 'limit'
+  | 'penalty'
+  | 'process'
+  | 'requirement'
+  | 'safety'
+  | 'tax';
+
+// Jurisdiction (from jurisdictions table)
+export interface Jurisdiction {
+  id: string;
+  jurisdiction_type: JurisdictionType;
+  parent_id: string | null;
+  name: string;
+  full_name: string | null;
+  slug: string;
+  state_code: string;
+  state_name: string;
+  county_name: string | null;
+  city_name: string | null;
+  is_unincorporated: boolean;
+  is_consolidated: boolean;
+  crosses_state_lines: boolean;
+  population: number | null;
+  str_market_tier: string | null;
+  timezone: string | null;
+  status: string;
+  coverage_status: CoverageStatus;
+  created_at: string;
+  updated_at: string;
+}
+
+// Jurisdiction for list views (minimal fields)
+export interface JurisdictionSummary {
+  id: string;
+  slug: string;
+  name: string;
+  full_name: string | null;
+  state_code: string;
+  state_name: string;
+  jurisdiction_type: JurisdictionType;
+  population: number | null;
+  coverage_status: CoverageStatus;
+}
+
+// JSONB field types for Regulation
+export interface RegistrationLevel {
+  fee: number | null;
+  agency: string | null;
+  fee_unit: string | null;
+  required: boolean | null;
+  permit_name: string | null;
+  extended_fee: number | null;
+  permit_classes: string[] | null;
+  processing_time: string | null;
+  renewal_required: boolean | null;
+  extended_fee_note: string | null;
+  reporting_required: boolean | null;
+  required_documents: string[];
+  reporting_frequency: string | null;
+  display_permit_on_listing: boolean | null;
+  primary_residence_required: boolean | null;
+  primary_residence_definition: string | null;
+}
+
+export interface RegistrationData {
+  city?: Partial<RegistrationLevel>;
+  county?: Partial<RegistrationLevel>;
+}
+
+export interface EligibilityData {
+  rso_note: string | null;
+  zones_allowed: string[];
+  cohost_allowed: boolean | null;
+  tenant_can_host: boolean | null;
+  hoa_can_prohibit: boolean | null;
+  zones_prohibited: string[];
+  tenant_requirements: string | null;
+  host_present_required: boolean | null;
+  property_types_allowed: string[];
+  owner_occupied_required: boolean | null;
+  max_properties_per_owner: number | null;
+  property_types_prohibited: string[];
+  primary_residence_required: boolean | null;
+  primary_residence_definition: string | null;
+}
+
+export interface LimitsLevel {
+  max_guests: number | null;
+  quiet_hours: string | null;
+  can_exceed_cap: boolean | null;
+  max_stay_nights: number | null;
+  min_stay_nights: number | null;
+  nights_per_year: number | null;
+  nights_applies_to: string | null;
+  max_guests_formula: string | null;
+  hosted_exempt_from_cap: boolean | null;
+  max_bookings_per_night: number | null;
+  exceed_cap_requirements: string | null;
+}
+
+export interface LimitsData {
+  city?: Partial<LimitsLevel>;
+  county?: Partial<LimitsLevel>;
+}
+
+export interface TaxesLevel {
+  tot_name: string | null;
+  tot_rate: number | null;
+  platform_remits: boolean | null;
+  platform_remits_note: string | null;
+  applies_to_stays_under: number | null;
+}
+
+export interface TaxesData {
+  city?: Partial<TaxesLevel>;
+  county?: Partial<TaxesLevel>;
+  state_sales_tax: number | null;
+  total_tax_rate_city: number | null;
+  total_tax_rate_county: number | null;
+}
+
+export interface SafetyData {
+  fire_extinguisher: boolean | null;
+  smoke_detectors: boolean | null;
+  carbon_monoxide_detectors: boolean | null;
+  emergency_exit_plan: boolean | null;
+  first_aid_kit: boolean | null;
+  inspection_required: boolean | null;
+  inspection_frequency: string | null;
+  inspection_agency: string | null;
+  other_requirements: string[];
+}
+
+export interface PenaltiesLevel {
+  notes: string | null;
+  max_fine: number | null;
+  daily_fine: number | null;
+  first_offense: string | null;
+  second_offense: string | null;
+  third_offense: string | null;
+  platform_removal: boolean | null;
+  permit_revocation: boolean | null;
+  criminal_penalties: boolean | null;
+}
+
+export interface PenaltiesData {
+  city?: Partial<PenaltiesLevel>;
+  county?: Partial<PenaltiesLevel>;
+}
+
+export interface ExemptionsData {
+  hosted_stays: boolean | null;
+  long_term_rentals: boolean | null;
+  owner_occupied: boolean | null;
+  other: string[];
+}
+
+export interface PreemptionData {
+  state_preempts_local: boolean | null;
+  notes: string | null;
+}
+
+export interface InsuranceData {
+  required: boolean | null;
+  minimum_coverage: number | null;
+  coverage_type: string | null;
+  notes: string | null;
+}
+
+// Main Regulation interface
+export interface Regulation {
+  id: string;
+  jurisdiction_id: string;
+  primary_source_id: string | null;
+  summary: string | null;
+  plain_english: string | null;
+  registration: RegistrationData | null;
+  eligibility: EligibilityData | null;
+  limits: LimitsData | null;
+  taxes: TaxesData | null;
+  insurance: InsuranceData | null;
+  safety: SafetyData | null;
+  penalties: PenaltiesData | null;
+  exemptions: ExemptionsData | null;
+  preemption: PreemptionData | null;
+  effective_date: string | null;
+  last_amended: string | null;
+  next_review_date: string | null;
+  law_reference: string | null;
+  confidence_score: number;
+  needs_review: boolean;
+  verified_at: string | null;
+  verified_by: string | null;
+  verification_notes: string | null;
+  status: RegulationStatus;
+  created_at: string;
+  updated_at: string;
+}
+
+// Regulation for list views with joined jurisdiction
+export interface RegulationWithJurisdiction {
+  id: string;
+  summary: string | null;
+  confidence_score: number;
+  status: RegulationStatus;
+  updated_at: string;
+  jurisdiction: JurisdictionSummary;
+}
+
+// Regulation Source
+export interface RegulationSource {
+  id: string;
+  jurisdiction_id: string;
+  url: string;
+  source_type: string;
+  source_name: string | null;
+  scrape_method: string;
+  scrape_frequency: string;
+  last_scraped_at: string | null;
+  last_changed_at: string | null;
+  last_error: string | null;
+  error_count: number;
+  status: string;
+  notes: string | null;
+  added_by: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+// Regulation Knowledge Item
+export interface RegulationKnowledge {
+  id: string;
+  regulation_id: string | null;
+  jurisdiction_id: string;
+  knowledge_type: RegulationKnowledgeType;
+  content: string;
+  searchable_text: string;
+  applies_to: string | null;
+  source_id: string | null;
+  created_at: string;
+}
+
+// Jurisdiction with nested regulation (for detail page)
+export interface JurisdictionWithRegulation {
+  jurisdiction: Jurisdiction;
+  regulation: Regulation | null;
+  knowledge: RegulationKnowledge[];
+  sources: RegulationSource[];
+}
+
+// Jurisdiction for directory listing (with partial regulation data)
+export interface JurisdictionForDirectory {
+  id: string;
+  slug: string;
+  name: string;
+  full_name: string | null;
+  state_code: string;
+  state_name: string;
+  jurisdiction_type: JurisdictionType;
+  population: number | null;
+  regulation: {
+    summary: string | null;
+    confidence_score: number;
+    status: RegulationStatus;
+    registration: RegistrationData | null;
+    eligibility: EligibilityData | null;
+    limits: LimitsData | null;
+    taxes: TaxesData | null;
+    penalties: PenaltiesData | null;
+    updated_at: string;
+  } | null;
+}
+
+// URL helper
+export function getRegulationUrl(jurisdiction: Pick<Jurisdiction, 'slug'>): string {
+  return `/regulations/${jurisdiction.slug}`;
+}

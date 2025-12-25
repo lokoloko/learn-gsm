@@ -1,0 +1,125 @@
+import Link from 'next/link';
+import { MapPin, FileCheck, Moon, Home, Percent, ArrowRight } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { StrictnessBadge } from '@/components/regulations/StrictnessBadge';
+import {
+  type JurisdictionForDirectory,
+  getRegulationUrl,
+} from '@/types/database';
+import {
+  deriveStrictness,
+  extractPublicFlags,
+  type RegulationFlags,
+} from '@/lib/utils/regulations';
+import { cn } from '@/lib/utils';
+
+interface MarketCardProps {
+  market: JurisdictionForDirectory;
+  className?: string;
+}
+
+function FlagItem({
+  icon: Icon,
+  label,
+  active,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  active: boolean;
+}) {
+  return (
+    <span
+      className={cn(
+        'inline-flex items-center gap-1 text-xs',
+        active ? 'text-foreground' : 'text-muted-foreground/50 line-through'
+      )}
+    >
+      <Icon className="h-3 w-3" />
+      {label}
+    </span>
+  );
+}
+
+export function MarketCard({ market, className }: MarketCardProps) {
+  const regulationUrl = getRegulationUrl(market);
+  const strictness = market.regulation
+    ? deriveStrictness(market.regulation)
+    : 'permissive';
+
+  // Extract public flags for display
+  const flags: RegulationFlags = market.regulation
+    ? extractPublicFlags(market.regulation, 0)
+    : {
+        permitRequired: false,
+        nightLimitsApply: false,
+        primaryResidenceOnly: false,
+        totalTaxRate: null,
+        gotchaCount: 0,
+      };
+
+  return (
+    <Card className={cn('group hover:shadow-lg transition-shadow', className)}>
+      <Link href={regulationUrl} className="block">
+        <CardContent className="p-4">
+          {/* Header: Name + Badge */}
+          <div className="flex items-start justify-between gap-2 mb-3">
+            <div className="flex-1 min-w-0">
+              <h3 className="font-medium text-sm group-hover:text-primary transition-colors truncate">
+                {market.name}
+              </h3>
+              <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
+                <MapPin className="h-3 w-3 flex-shrink-0" />
+                <span className="truncate">{market.state_name}</span>
+              </p>
+            </div>
+            <StrictnessBadge level={strictness} size="sm" showLabel={true} />
+          </div>
+
+          {/* Summary (truncated) */}
+          {market.regulation?.summary && (
+            <p className="text-xs text-muted-foreground line-clamp-2 mb-3">
+              {market.regulation.summary}
+            </p>
+          )}
+
+          {/* Boolean Flags */}
+          <div className="flex flex-wrap gap-x-3 gap-y-1.5 mb-3">
+            <FlagItem
+              icon={FileCheck}
+              label="Permit"
+              active={flags.permitRequired}
+            />
+            <FlagItem
+              icon={Moon}
+              label="Night limits"
+              active={flags.nightLimitsApply}
+            />
+            <FlagItem
+              icon={Home}
+              label="Primary residence"
+              active={flags.primaryResidenceOnly}
+            />
+          </div>
+
+          {/* Tax Rate + CTA */}
+          <div className="flex items-center justify-between pt-2 border-t border-border">
+            {flags.totalTaxRate ? (
+              <span className="text-xs text-muted-foreground flex items-center gap-1">
+                <Percent className="h-3 w-3" />
+                {flags.totalTaxRate} total tax
+              </span>
+            ) : (
+              <span className="text-xs text-muted-foreground">
+                Tax info unavailable
+              </span>
+            )}
+            <span className="text-xs text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              View details
+              <ArrowRight className="h-3 w-3" />
+            </span>
+          </div>
+        </CardContent>
+      </Link>
+    </Card>
+  );
+}

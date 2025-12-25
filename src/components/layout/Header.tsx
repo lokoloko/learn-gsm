@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 const navigation = [
   { name: 'Videos', href: '/videos' },
   { name: 'News', href: '/news' },
+  { name: 'Rules', href: '/regulations' },
   { name: 'Topics', href: '/topics' },
 ];
 
