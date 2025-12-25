@@ -35,7 +35,7 @@ async function getMarkets(): Promise<JurisdictionForDirectory[]> {
         updated_at
       )
     `)
-    .eq('coverage_status', 'covered')
+    .in('coverage_status', ['partial', 'full', 'verified'])
     .order('population', { ascending: false });
 
   if (error) {

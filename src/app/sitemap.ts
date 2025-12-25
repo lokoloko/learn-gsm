@@ -145,15 +145,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  // Regulation pages - all covered jurisdictions
+  // Regulation pages - all jurisdictions with partial/full/verified coverage
   type JurisdictionRow = { slug: string; updated_at: string | null };
-  const jurisdictions = await fetchAllRows<JurisdictionRow>(
-    supabase,
-    'jurisdictions',
-    'slug, updated_at',
-    [{ column: 'coverage_status', value: 'covered' }],
-    { column: 'population', ascending: false }
-  );
+  const { data: jurisdictionsData } = await supabase
+    .from('jurisdictions')
+    .select('slug, updated_at')
+    .in('coverage_status', ['partial', 'full', 'verified'])
+    .order('population', { ascending: false });
+  const jurisdictions: JurisdictionRow[] = jurisdictionsData || [];
 
   const regulationPages: MetadataRoute.Sitemap = jurisdictions.map((jur) => ({
     url: `${BASE_URL}/regulations/${jur.slug}`,

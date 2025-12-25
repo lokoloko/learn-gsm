@@ -93,7 +93,7 @@ async function getJurisdiction(slug: string): Promise<Jurisdiction | null> {
     .from('jurisdictions')
     .select('*')
     .eq('slug', slug)
-    .eq('coverage_status', 'covered')
+    .in('coverage_status', ['partial', 'full', 'verified'])
     .single();
 
   if (error || !data) return null;
@@ -154,7 +154,7 @@ async function getRelatedMarkets(
         updated_at
       )
     `)
-    .eq('coverage_status', 'covered')
+    .in('coverage_status', ['partial', 'full', 'verified'])
     .eq('state_code', stateCode)
     .neq('id', excludeId)
     .order('population', { ascending: false })
