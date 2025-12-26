@@ -23,13 +23,12 @@ export function StateGrouper({ markets, className }: StateGrouperProps) {
 
   const toggleState = (stateCode: string) => {
     setExpandedStates((prev) => {
-      const next = new Set(prev);
-      if (next.has(stateCode)) {
-        next.delete(stateCode);
-      } else {
-        next.add(stateCode);
+      // If already expanded, collapse it
+      if (prev.has(stateCode)) {
+        return new Set();
       }
-      return next;
+      // Otherwise, expand only this state (accordion behavior)
+      return new Set([stateCode]);
     });
   };
 
