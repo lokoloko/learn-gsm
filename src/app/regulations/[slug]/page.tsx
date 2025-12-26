@@ -300,22 +300,14 @@ export default async function RegulationDetailPage({ params }: PageProps) {
             </Card>
           )}
 
-          {/* Plain English - authenticated+ only */}
+          {/* Plain English - visible to all users */}
           {regulation?.plain_english && (
             <Card>
               <CardContent className="pt-6">
                 <h2 className="text-lg font-semibold mb-3">In Plain English</h2>
-                {canSeeFullContent ? (
-                  <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
-                    {regulation.plain_english}
-                  </p>
-                ) : (
-                  <LockedContent
-                    type={getLockType()}
-                    featureLabel="Plain English Guide"
-                    marketName={jurisdiction.name}
-                  />
-                )}
+                <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
+                  {regulation.plain_english}
+                </p>
               </CardContent>
             </Card>
           )}
