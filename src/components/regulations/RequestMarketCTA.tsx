@@ -22,7 +22,7 @@ export function RequestMarketCTA({ className }: RequestMarketCTAProps) {
         We&apos;re constantly adding new markets. Let us know which city or county
         you&apos;d like us to research next.
       </p>
-      <a href="mailto:hello@gostudiom.com?subject=Market%20Request%20-%20Learn%20STR">
+      <a href="https://gostudiom.com/contact">
         <Button variant="outline" className="gap-2">
           <Mail className="h-4 w-4" />
           Request a Market
