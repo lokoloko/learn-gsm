@@ -17,7 +17,6 @@ import { MarketCard } from '@/components/cards';
 import {
   deriveStrictness,
   formatConfidence,
-  truncateSummary,
   areSTRsAllowed,
 } from '@/lib/utils/regulations';
 import {
@@ -290,20 +289,13 @@ export default async function RegulationDetailPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Summary - truncated for public, full for authenticated */}
+          {/* Summary - visible to all users */}
           {regulation?.summary && (
             <Card>
               <CardContent className="pt-6">
                 <p className="text-muted-foreground leading-relaxed">
-                  {canSeeFullContent
-                    ? regulation.summary
-                    : truncateSummary(regulation.summary)}
+                  {regulation.summary}
                 </p>
-                {!canSeeFullContent && regulation.summary.length > 150 && (
-                  <p className="text-sm text-muted-foreground/70 mt-2 italic">
-                    Sign up free to read the full summary...
-                  </p>
-                )}
               </CardContent>
             </Card>
           )}
