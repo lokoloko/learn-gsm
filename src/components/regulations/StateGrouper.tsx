@@ -56,7 +56,7 @@ export function StateGrouper({ markets, className }: StateGrouperProps) {
                   )}
                   <span className="font-medium">{stateName}</span>
                 </div>
-                <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
+                <span className="inline-flex items-center text-xs font-medium text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
                   {items.length} {items.length === 1 ? 'market' : 'markets'}
                 </span>
               </button>
