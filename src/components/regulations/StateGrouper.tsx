@@ -70,12 +70,12 @@ export function StateGrouper({ markets, className }: StateGrouperProps) {
           return (
             <div
               key={stateCode}
-              className="border border-border rounded-lg overflow-hidden bg-background"
+              className="relative border border-border rounded-lg bg-background"
             >
               {/* State Header */}
               <button
                 onClick={() => toggleState(stateCode)}
-                className="w-full flex items-center justify-between px-4 py-3 hover:bg-muted transition-colors text-left"
+                className="w-full flex items-center justify-between px-4 py-3 hover:bg-muted transition-colors text-left rounded-lg"
               >
                 <div className="flex items-center gap-2">
                   {isExpanded ? (
@@ -90,9 +90,9 @@ export function StateGrouper({ markets, className }: StateGrouperProps) {
                 </span>
               </button>
 
-              {/* Markets List */}
+              {/* Markets List - Absolute positioned dropdown */}
               {isExpanded && (
-                <ul className="border-t border-border divide-y divide-border">
+                <ul className="absolute left-0 right-0 top-full z-50 mt-0.5 border border-border rounded-lg bg-background shadow-lg divide-y divide-border max-h-80 overflow-y-auto">
                   {items.map((market) => {
                     const strictness = market.regulation
                       ? deriveStrictness(market.regulation)
