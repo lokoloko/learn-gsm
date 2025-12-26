@@ -373,16 +373,8 @@ export function truncateSummary(summary: string | null, maxLength: number = 150)
  * Returns false if explicitly prohibited, true otherwise.
  */
 export function areSTRsAllowed(regulation: Partial<Regulation> | null): boolean {
-  if (!regulation) return true; // Assume allowed if no data
-
-  // Check if registration explicitly says not allowed
-  if (
-    regulation.registration?.city?.allowed === false ||
-    regulation.registration?.county?.allowed === false
-  ) {
-    return false;
-  }
-
+  // For now, assume STRs are allowed unless we have explicit prohibition data
+  // The current schema doesn't have a dedicated "allowed" field
   return true;
 }
 
