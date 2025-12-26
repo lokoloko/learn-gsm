@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
-import { Search } from 'lucide-react';
 import { createClient } from '@/lib/supabase-server';
-import { MarketCard } from '@/components/cards';
 import { MarketSearch } from '@/components/regulations/MarketSearch';
 import { StateGrouper } from '@/components/regulations/StateGrouper';
 import { RequestMarketCTA } from '@/components/regulations/RequestMarketCTA';
@@ -52,7 +50,6 @@ async function getMarkets(): Promise<JurisdictionForDirectory[]> {
 
 export default async function RegulationsPage() {
   const markets = await getMarkets();
-  const popularMarkets = markets.slice(0, 8);
 
   return (
     <div className="flex flex-col">
@@ -73,20 +70,6 @@ export default async function RegulationsPage() {
           </div>
         </div>
       </section>
-
-      {/* Popular Markets */}
-      {popularMarkets.length > 0 && (
-        <section className="py-3 lg:py-5">
-          <div className="container">
-            <h2 className="text-2xl font-bold mb-6">Popular Markets</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {popularMarkets.map((market) => (
-                <MarketCard key={market.id} market={market} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Browse by State */}
       <section className="py-3 lg:py-5 bg-muted/30">
