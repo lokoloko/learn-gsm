@@ -91,7 +91,7 @@ export function MarketCard({ market, className }: MarketCardProps) {
           )}
 
           {/* Tax Rate + CTA */}
-          <div className="flex items-center justify-between pt-2 border-t border-border">
+          <div className="flex items-center justify-between pt-2">
             {flags.totalTaxRate && (
               <span className="text-xs text-muted-foreground flex items-center gap-1">
                 <Percent className="h-3 w-3" />
