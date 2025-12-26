@@ -21,19 +21,12 @@ interface MarketCardProps {
 function FlagItem({
   icon: Icon,
   label,
-  active,
 }: {
   icon: React.ComponentType<{ className?: string }>;
   label: string;
-  active: boolean;
 }) {
   return (
-    <span
-      className={cn(
-        'inline-flex items-center gap-1 text-xs',
-        active ? 'text-foreground' : 'text-muted-foreground/50 line-through'
-      )}
-    >
+    <span className="inline-flex items-center gap-1 text-xs text-foreground">
       <Icon className="h-3 w-3" />
       {label}
     </span>
@@ -82,38 +75,33 @@ export function MarketCard({ market, className }: MarketCardProps) {
             </p>
           )}
 
-          {/* Boolean Flags */}
-          <div className="flex flex-wrap gap-x-3 gap-y-1.5 mb-3">
-            <FlagItem
-              icon={FileCheck}
-              label="Permit"
-              active={flags.permitRequired}
-            />
-            <FlagItem
-              icon={Moon}
-              label="Night limits"
-              active={flags.nightLimitsApply}
-            />
-            <FlagItem
-              icon={Home}
-              label="Primary residence"
-              active={flags.primaryResidenceOnly}
-            />
-          </div>
+          {/* Boolean Flags - only show active ones */}
+          {(flags.permitRequired || flags.nightLimitsApply || flags.primaryResidenceOnly) && (
+            <div className="flex flex-wrap gap-x-3 gap-y-1.5 mb-3">
+              {flags.permitRequired && (
+                <FlagItem icon={FileCheck} label="Permit required" />
+              )}
+              {flags.nightLimitsApply && (
+                <FlagItem icon={Moon} label="Night limits" />
+              )}
+              {flags.primaryResidenceOnly && (
+                <FlagItem icon={Home} label="Primary residence" />
+              )}
+            </div>
+          )}
 
           {/* Tax Rate + CTA */}
           <div className="flex items-center justify-between pt-2 border-t border-border">
-            {flags.totalTaxRate ? (
+            {flags.totalTaxRate && (
               <span className="text-xs text-muted-foreground flex items-center gap-1">
                 <Percent className="h-3 w-3" />
                 {flags.totalTaxRate} total tax
               </span>
-            ) : (
-              <span className="text-xs text-muted-foreground">
-                Tax info unavailable
-              </span>
             )}
-            <span className="text-xs text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+            <span className={cn(
+              "text-xs text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity",
+              !flags.totalTaxRate && "ml-auto"
+            )}>
               View details
               <ArrowRight className="h-3 w-3" />
             </span>

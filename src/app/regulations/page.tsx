@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Search, MapPin, TrendingUp } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { createClient } from '@/lib/supabase-server';
 import { MarketCard } from '@/components/cards';
 import { MarketSearch } from '@/components/regulations/MarketSearch';
@@ -76,12 +76,9 @@ export default async function RegulationsPage() {
 
       {/* Popular Markets */}
       {popularMarkets.length > 0 && (
-        <section className="py-8 lg:py-12">
+        <section className="py-3 lg:py-5">
           <div className="container">
-            <div className="flex items-center gap-2 mb-6">
-              <TrendingUp className="h-5 w-5 text-primary" />
-              <h2 className="text-2xl font-bold">Popular Markets</h2>
-            </div>
+            <h2 className="text-2xl font-bold mb-6">Popular Markets</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {popularMarkets.map((market) => (
                 <MarketCard key={market.id} market={market} />
@@ -92,12 +89,9 @@ export default async function RegulationsPage() {
       )}
 
       {/* Browse by State */}
-      <section className="py-8 lg:py-12 bg-muted/30">
+      <section className="py-3 lg:py-5 bg-muted/30">
         <div className="container">
-          <div className="flex items-center gap-2 mb-6">
-            <MapPin className="h-5 w-5 text-primary" />
-            <h2 className="text-2xl font-bold">Browse by State</h2>
-          </div>
+          <h2 className="text-2xl font-bold mb-6">Browse by State</h2>
           <StateGrouper markets={markets} />
         </div>
       </section>

@@ -108,7 +108,7 @@ export function StateGrouper({ markets, className }: StateGrouperProps) {
                           <StrictnessBadge
                             level={strictness}
                             size="sm"
-                            showLabel={false}
+                            variant="icon-only"
                           />
                         </Link>
                       </li>

@@ -39,8 +39,8 @@ export const STRICTNESS_META: Record<
   },
   permissive: {
     label: 'Permissive',
-    color: 'text-emerald-800 dark:text-emerald-200',
-    bgColor: 'bg-emerald-100 border border-emerald-300 dark:bg-emerald-900 dark:border-emerald-700',
+    color: 'text-muted-foreground',
+    bgColor: 'bg-muted',
     description: 'Relatively few restrictions on STR operations',
   },
 };

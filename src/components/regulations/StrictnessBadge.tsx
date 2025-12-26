@@ -7,6 +7,7 @@ interface StrictnessBadgeProps {
   showIcon?: boolean;
   showLabel?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  variant?: 'badge' | 'icon-only';
   className?: string;
 }
 
@@ -44,9 +45,19 @@ export function StrictnessBadge({
   showIcon = true,
   showLabel = true,
   size = 'md',
+  variant = 'badge',
   className,
 }: StrictnessBadgeProps) {
   const meta = STRICTNESS_META[level];
+
+  // Icon-only variant: just the colored icon, no background
+  if (variant === 'icon-only') {
+    return (
+      <span className={cn(meta.color, className)} title={meta.description}>
+        <StrictnessIcon level={level} className={iconSizes[size]} />
+      </span>
+    );
+  }
 
   return (
     <span
