@@ -375,11 +375,6 @@ export function truncateSummary(summary: string | null, maxLength: number = 150)
 export function areSTRsAllowed(regulation: Partial<Regulation> | null): boolean {
   if (!regulation) return true; // Assume allowed if no data
 
-  // Check if status indicates prohibition
-  if (regulation.status === 'prohibited' || regulation.status === 'banned') {
-    return false;
-  }
-
   // Check if registration explicitly says not allowed
   if (
     regulation.registration?.city?.allowed === false ||
