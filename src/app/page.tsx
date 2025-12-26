@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, MessageCircle, PlayCircle, Newspaper } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { VideoCard, NewsCard, CategoryCard } from '@/components/cards';
 import { createClient } from '@/lib/supabase-server';
@@ -62,22 +62,6 @@ export default async function HomePage() {
 
             {/* Chat Input */}
             <HeroChatInput />
-
-            {/* Quick Links */}
-            <div className="flex flex-wrap justify-center gap-4 mt-8">
-              <Link href="/videos">
-                <Button variant="outline" size="sm">
-                  <PlayCircle className="mr-2 h-4 w-4" />
-                  Browse Videos
-                </Button>
-              </Link>
-              <Link href="/news">
-                <Button variant="outline" size="sm">
-                  <Newspaper className="mr-2 h-4 w-4" />
-                  Read News
-                </Button>
-              </Link>
-            </div>
           </div>
         </div>
       </section>
