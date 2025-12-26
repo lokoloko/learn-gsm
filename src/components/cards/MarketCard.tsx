@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { MapPin, FileCheck, Moon, Home, Percent, ArrowRight } from 'lucide-react';
+import { MapPin, FileCheck, Moon, Home, Percent } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { StrictnessBadge } from '@/components/regulations/StrictnessBadge';
 import {
@@ -90,22 +90,15 @@ export function MarketCard({ market, className }: MarketCardProps) {
             </div>
           )}
 
-          {/* Tax Rate + CTA */}
-          <div className="flex items-center justify-between pt-2">
-            {flags.totalTaxRate && (
+          {/* Tax Rate - only show if available */}
+          {flags.totalTaxRate && (
+            <div className="flex items-center pt-2">
               <span className="text-xs text-muted-foreground flex items-center gap-1">
                 <Percent className="h-3 w-3" />
                 {flags.totalTaxRate} total tax
               </span>
-            )}
-            <span className={cn(
-              "text-xs text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity",
-              !flags.totalTaxRate && "ml-auto"
-            )}>
-              View details
-              <ArrowRight className="h-3 w-3" />
-            </span>
-          </div>
+            </div>
+          )}
         </CardContent>
       </Link>
     </Card>
