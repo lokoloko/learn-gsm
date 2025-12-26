@@ -94,8 +94,8 @@ function KnowledgeGroup({
         <ul className="space-y-3">
           {items.map((item) => (
             <li key={item.id} className="flex gap-3 text-sm">
-              <span className={cn('mt-1', config.color)}>•</span>
-              <span className="text-muted-foreground">{item.content}</span>
+              <span className={cn('mt-1 flex-shrink-0', config.color)}>•</span>
+              <span className="text-muted-foreground break-words min-w-0">{item.content}</span>
             </li>
           ))}
         </ul>
