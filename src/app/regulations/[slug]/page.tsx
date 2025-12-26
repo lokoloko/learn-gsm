@@ -404,15 +404,15 @@ export default async function RegulationDetailPage({ params }: PageProps) {
             )}
 
           {/* Disclaimer */}
-          <Card className="border-amber-200 dark:border-amber-900 bg-amber-50/50 dark:bg-amber-900/10">
+          <Card className="border-border bg-muted/50">
             <CardContent className="pt-6">
               <div className="flex gap-3">
-                <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+                <AlertCircle className="h-5 w-5 text-muted-foreground flex-shrink-0 mt-0.5" />
                 <div className="text-sm">
-                  <p className="font-medium text-amber-800 dark:text-amber-300 mb-1">
+                  <p className="font-medium text-foreground mb-1">
                     Disclaimer
                   </p>
-                  <p className="text-amber-700 dark:text-amber-400/80">
+                  <p className="text-muted-foreground">
                     This information is for general guidance only and should not
                     be considered legal advice. Regulations change frequently.
                     Always verify current requirements with local government
