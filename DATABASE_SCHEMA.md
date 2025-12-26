@@ -6,9 +6,9 @@ This document describes the Supabase tables used by Learn STR. These tables are 
 
 | Domain | Tables | Records |
 |--------|--------|---------|
-| Videos | `videos_channels`, `videos_parsed`, `videos_knowledge` | 100k+ knowledge items |
-| News | `news_sources`, `news_articles`, `news_knowledge` | 6k+ knowledge items |
-| Regulations | `jurisdictions`, `regulations`, `regulations_knowledge`, `regulation_sources` | 120+ markets, 15k+ knowledge items |
+| Videos | `videos_channels`, `videos_parsed`, `videos_knowledge` | 13,750+ videos, 100k+ knowledge items |
+| News | `news_sources`, `news_articles`, `news_knowledge` | 1,800+ articles, 6k+ knowledge items |
+| Regulations | `jurisdictions`, `regulations`, `regulations_knowledge`, `regulation_sources` | 260+ markets, 15k+ knowledge items |
 | Auth | `profiles`, `user_settings` | Shared with GoStudioM apps |
 
 ## Enums
@@ -56,7 +56,7 @@ This document describes the Supabase tables used by Learn STR. These tables are 
 
 ### coverage_status
 ```
-'covered' | 'pending' | 'research' | 'not_applicable'
+'partial' | 'full' | 'verified' | 'pending' | 'research'
 ```
 
 ### regulation_status
@@ -148,6 +148,10 @@ Parsed video data with AI-extracted metadata.
 
 **Key filters for display:**
 - `ai_status = 'completed'` - Only show fully parsed videos
+
+**URL pattern:**
+- All videos have SEO-friendly slugs: `/videos/{slug}` where slug = `{title-slugified}-{youtube_video_id}`
+- Example: `/videos/how-to-start-airbnb-business-5PKaj0tUA88`
 
 ### videos_knowledge
 
@@ -275,7 +279,7 @@ Markets/cities with STR regulation coverage.
 | updated_at | timestamptz | YES | now() | |
 
 **Key filters for display:**
-- `coverage_status = 'covered'` - Only show markets with regulation data
+- `coverage_status IN ('partial', 'full', 'verified')` - Only show markets with regulation data
 
 ### regulations
 

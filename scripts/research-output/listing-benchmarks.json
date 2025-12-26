@@ -1,0 +1,1711 @@
+{
+  "benchmarks": [
+    {
+      "attribute": "photo_count",
+      "insight": "Professional photos can increase your Airbnb booking rate by 30-50%.",
+      "numbers": [
+        "50%",
+        "30-50"
+      ],
+      "confidence": "high",
+      "source_category": "Your Listing",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "photo_count",
+      "insight": "Professional photos can increase Airbnb bookings by up to 40%.",
+      "numbers": [
+        "40%"
+      ],
+      "confidence": "medium",
+      "source_category": "Your Listing",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "instant_book",
+      "insight": "Setting a minimum of two nights, requiring a government ID, and only allowing instant bookings from guests with positive reviews filters out 90% of problem stays.",
+      "numbers": [
+        "90%"
+      ],
+      "confidence": "medium",
+      "source_category": "Hosting Operations",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "instant_book",
+      "insight": "Properties using Instant Book have shown a 60% increase in occupancy rates.",
+      "numbers": [
+        "60%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "instant_book",
+      "insight": "Using Instant Book eliminates up to 70% of your ability to pre-screen guests.",
+      "numbers": [
+        "70%"
+      ],
+      "confidence": "medium",
+      "source_category": "Hosting Operations",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "instant_book",
+      "insight": "The \"I'm uncomfortable with this reservation\" reason is the only reason you can cancel an Instant Booking without penalty (up to 3x per year).",
+      "numbers": [
+        "3x"
+      ],
+      "confidence": "medium",
+      "source_category": "Hosting Operations",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "instant_book",
+      "insight": "68% of fraudulent or high-risk bookings happen on instant book listings without guest screening.",
+      "numbers": [
+        "68%"
+      ],
+      "confidence": "medium",
+      "source_category": "Hosting Operations",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "instant_book",
+      "insight": "If a property is listed as Instant Book, 100% availability might be presumed, but calendar blocking can skew this data.",
+      "numbers": [
+        "100%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "response_rate",
+      "insight": "A 90% response rate to guest inquiries is needed to maintain Superhost status.",
+      "numbers": [
+        "90%"
+      ],
+      "confidence": "medium",
+      "source_category": "Your Listing",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "response_rate",
+      "insight": "It is important to respond to messages quickly to achieve a high response rate. To obtain Superhost status, a 90%+ response rate is needed.",
+      "numbers": [
+        "90%"
+      ],
+      "confidence": "medium",
+      "source_category": "Growth & Marketing",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "response_rate",
+      "insight": "To qualify as a Superhost, you must maintain at least a 90% response rate.",
+      "numbers": [
+        "90%"
+      ],
+      "confidence": "medium",
+      "source_category": "Your Listing",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "response_rate",
+      "insight": "Maintaining a response rate of 90% or higher is crucial for achieving Superhost status and building positive reviews. Communication is key.",
+      "numbers": [
+        "90%"
+      ],
+      "confidence": "medium",
+      "source_category": "Your Listing",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "minimum_stay",
+      "insight": "In a popular weekend market, a minimum of two nights stay only yields approximately 30% occupancy.",
+      "numbers": [
+        "30%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "minimum_stay",
+      "insight": "Approximately 70% of Airbnb hosts don't effectively use dynamic pricing, minimum stays, or occupancy optimization strategies.",
+      "numbers": [
+        "70%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "minimum_stay",
+      "insight": "One BNB Tribe member increased occupancy by 20% and ADR by $40 by dropping minimum stay requirements and better using dynamic pricing.",
+      "numbers": [
+        "20%",
+        "$40"
+      ],
+      "confidence": "high",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "minimum_stay",
+      "insight": "iGMS has four pricing tiers, with the 'Lite' tier only compatible with Airbnb and supports up to four listings; the 'Flex' tier is per booked night but at a minimum of $20 per property each month; and 'Pro' tier is one price per month but that price stays steady even with up to 29 listings.",
+      "numbers": [
+        "$20"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "cleaning_fee",
+      "insight": "Calculate potential revenue by subtracting 15% (for Airbnb fees), cleaning costs, and taxes from the listed price for a week's stay.",
+      "numbers": [
+        "15%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "description",
+      "insight": "If a guest is reading your description, they are one hair away from booking. They are usually down to 3-4 choices.",
+      "numbers": [
+        "3-4"
+      ],
+      "confidence": "medium",
+      "source_category": "Your Listing",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "cancellation_policy",
+      "insight": "The $1 million host guarantee policy covers damage to the property, unexpected cleaning costs due to guest behavior, and income lost if bookings need to be canceled due to guest-caused damage.",
+      "numbers": [
+        "$1"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "cancellation_policy",
+      "insight": "About 60% of the time guests who inquire about a refund after an event cancelation are likely to accept your standard refund policy and continue with the booking. This is according to the hosts' experience.",
+      "numbers": [
+        "60%"
+      ],
+      "confidence": "medium",
+      "source_category": "Hosting Operations",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "cancellation_policy",
+      "insight": "Payment terms are being offered on bookings over $500 with refundable cancellation policies, and early data shows almost two-thirds of guests are choosing to pay in installments.",
+      "numbers": [
+        "$500"
+      ],
+      "confidence": "medium",
+      "source_category": "Hosting Operations",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "The goal of Level 1 pricing strategy is for you to get over 90% occupancy.",
+      "numbers": [
+        "90%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Hosts often employ dynamic pricing strategies to achieve near 100% occupancy.",
+      "numbers": [
+        "100%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "The goal of this pricing strategy is to double your rent or mortgage with only a 66% occupancy rate (20 days).",
+      "numbers": [
+        "66%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "The host achieves around 95% occupancy per year using his pricing strategy.",
+      "numbers": [
+        "95%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "If historical data shows a typical occupancy rate of 40% in a specific period, this information should be used as a benchmark to inform your pricing strategy.",
+      "numbers": [
+        "40%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Hospitable's dynamic pricing tool has shown an average revenue increase of 15% for users.",
+      "numbers": [
+        "15%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Dynamic pricing is very important, as not keeping prices updated can cost you $100,000+ a month in revenue, potentially half of your income.",
+      "numbers": [
+        "$100,000",
+        "000+"
+      ],
+      "confidence": "high",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Dynamic pricing can increase revenue by 30% by eliminating 2-day minimums and adjusting prices for the weekday, which requires hosts to not have any sense of ego about their rental property.",
+      "numbers": [
+        "30%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "When selecting a dynamic pricing tool, the pricing structure depends on the price and occupancy of your STR. If you're routinely over $100 a night with >50% occupancy, choose the flat rate over the % of revenue model.",
+      "numbers": [
+        "50%",
+        "$100"
+      ],
+      "confidence": "high",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Using a dynamic pricing tool like PriceLabs can significantly increase revenue compared to using a fixed price year-round.  One host increased revenue from $45,000 to $160,000 by implementing a dynamic pricing strategy.",
+      "numbers": [
+        "$45,000",
+        "$160,000"
+      ],
+      "confidence": "high",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Advanced dynamic pricing strategies can boost revenue by 30-40%.",
+      "numbers": [
+        "40%",
+        "30-40"
+      ],
+      "confidence": "high",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Dynamic pricing users saw an average revenue increase of nearly 15%, demonstrating the tool's potential to optimize pricing and boost revenue.",
+      "numbers": [
+        "15%"
+      ],
+      "confidence": "medium",
+      "source_category": "Growth & Marketing",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Actively managing dynamic pricing can increase nightly rates and occupancy, resulting in up to 30% more revenue than competitors.",
+      "numbers": [
+        "30%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "85% occupancy is a good target when using dynamic pricing to maximize revenue without pricing too high and reducing demand.",
+      "numbers": [
+        "85%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Dynamic pricing software can increase revenue by 20-40% compared to manual rate adjustments, and also cuts back on time spent making those manual adjustments.",
+      "numbers": [
+        "40%",
+        "20-40"
+      ],
+      "confidence": "high",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "When using dynamic pricing tools, revenue from bookings went higher than £4 million per year, indicating an increase of over 20%.",
+      "numbers": [
+        "20%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Using a dynamic pricing tool can increase revenue by 20%.",
+      "numbers": [
+        "20%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Implementing a dynamic pricing strategy can increase revenue between 50% and 100%.",
+      "numbers": [
+        "50%",
+        "100%"
+      ],
+      "confidence": "high",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Investing in dynamic pricing software like PriceLabs can lead to a 30% increase in revenue.",
+      "numbers": [
+        "30%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "To increase revenue by 20-30%, implement dynamic pricing with tools like PriceLabs.",
+      "numbers": [
+        "30%",
+        "20-30"
+      ],
+      "confidence": "high",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Dynamic pricing can boost everyday revenue by up to 40%.",
+      "numbers": [
+        "40%"
+      ],
+      "confidence": "medium",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Properties that use dynamic pricing increase their revenue by 10-15%.",
+      "numbers": [
+        "15%",
+        "10-15"
+      ],
+      "confidence": "high",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Dynamic pricing is now considered essential for maximizing revenue in the short-term rental business, helping BK Stays increase revenue by 25-45% per property.",
+      "numbers": [
+        "45%",
+        "25-45"
+      ],
+      "confidence": "high",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    },
+    {
+      "attribute": "nightly_price",
+      "insight": "Hospitable's dynamic pricing tool has led to a 20.1% increase in occupancy rates and a 14.5% increase in revenue per available night for users compared to non-users.",
+      "numbers": [
+        "20.1%",
+        "14.5%"
+      ],
+      "confidence": "high",
+      "source_category": "Pricing & Profitability",
+      "knowledge_type": "insight"
+    }
+  ],
+  "amenities": [
+    {
+      "amenity": "fire",
+      "normalized_name": "fire_pit",
+      "mention_count": 54,
+      "insight_examples": [
+        "Guests are willing to pay premium nightly rates for luxury cabin experiences with amenities like hot tubs, fire pits, and outdoor living in Broken Bow.",
+        "The listing includes outdoor features like a fire pit with firewood and string lights, enhancing the overall guest experience.",
+        "Consider adding an outdoor fire pit to the property and staging it for photos."
+      ],
+      "categories": [
+        "Pricing & Profitability",
+        "Your Listing",
+        "Growth & Marketing",
+        "Hosting Operations"
+      ],
+      "tier": "essential"
+    },
+    {
+      "amenity": "coffee",
+      "normalized_name": "coffee_maker",
+      "mention_count": 42,
+      "insight_examples": [
+        "All-in-one kitchen units combine a coffee maker, oven, and stovetop for efficient use of counter space.",
+        "Add mason jars to your coffee station labeled for coffee, decaf, creamer, sugar, and tea packets. Place a coffee maker and electric kettle beside the mason jars to allow the guest to easily see everyt",
+        "Creating a coffee station - not just providing a coffee maker - with ground coffee, sweeteners, creamers, and breakfast items enhances the guest experience."
+      ],
+      "categories": [
+        "Your Listing",
+        "Growth & Marketing",
+        "Hosting Operations"
+      ],
+      "tier": "high_impact"
+    },
+    {
+      "amenity": "kitchen",
+      "normalized_name": "kitchen",
+      "mention_count": 33,
+      "insight_examples": [
+        "Consider adding multiple ovens to your kitchen for larger groups to provide the flexibility to cook for large groups.",
+        "The concept of having the kitchen ready to cook, before you start cooking.",
+        "It is important to have cooking supplies as guests expect full kitchens, and could impact your rating."
+      ],
+      "categories": [
+        "Your Listing",
+        "Hosting Operations",
+        "Pricing & Profitability"
+      ],
+      "tier": "high_impact"
+    },
+    {
+      "amenity": "pool",
+      "normalized_name": "pool",
+      "mention_count": 18,
+      "insight_examples": [
+        "Unique amenities like pickleball courts, swimming pools, and ping-pong tables enhance a property's appeal.",
+        "Consider amenities like a pickleball court, swimming pool, and ping pong table to make your property more attractive.",
+        "Many Culiacán residents learned to swim in the park's pool during the 1970s."
+      ],
+      "categories": [
+        "Your Listing",
+        "Growth & Marketing",
+        "Regulations & Compliance",
+        "Pricing & Profitability",
+        "Hosting Operations"
+      ],
+      "tier": "premium"
+    },
+    {
+      "amenity": "wifi",
+      "normalized_name": "wifi",
+      "mention_count": 13,
+      "insight_examples": [
+        "Install Starlink WiFi in remote locations to attract guests who need reliable internet.",
+        "Provides fast, efficient internet to power smart home devices without buffering.",
+        "Mesh WiFi networks offer better coverage and faster speeds compared to standard routers from internet service providers."
+      ],
+      "categories": [
+        "Your Listing",
+        "Pricing & Profitability",
+        "Hosting Operations"
+      ],
+      "tier": "nice_to_have"
+    },
+    {
+      "amenity": "smart",
+      "normalized_name": "self_check_in",
+      "mention_count": 12,
+      "insight_examples": [
+        "Keyless entry smart lock.",
+        "Keyless entry smart lock with WiFi.",
+        "Install smart locks for remote keyless entry; this simplifies guest arrivals, improves security, and allows quick code changes."
+      ],
+      "categories": [
+        "Hosting Operations"
+      ],
+      "tier": "nice_to_have"
+    },
+    {
+      "amenity": "wifi",
+      "normalized_name": "wifi",
+      "mention_count": 10,
+      "insight_examples": [
+        "Even with smart technology, it's essential to have a backup plan, such as a hidden key, in case of power outages or WiFi issues.",
+        "The Guest App provides guests with convenient access to essential information such as directions, WiFi details, and door instructions, enhancing their overall experience.",
+        "Failing to populate the Guest App with essential information (WiFi codes, door instructions) can cause guest frustration and increase support requests."
+      ],
+      "categories": [
+        "Hosting Operations",
+        "Your Listing",
+        "Growth & Marketing",
+        "Pricing & Profitability"
+      ],
+      "tier": "nice_to_have"
+    },
+    {
+      "amenity": "workspace",
+      "normalized_name": "dedicated_workspace",
+      "mention_count": 8,
+      "insight_examples": [
+        "New trends like remote work may increase demand for vacation rentals if digital nomads continue seeking alternative workspaces.",
+        "Ensure your listings provide amenities to work remotely, such as excellent internet and a dedicated workspace to target a segment of traveler who is now working from home.",
+        "A dedicated workspace with extra charging plugs caters to guests who need to work remotely."
+      ],
+      "categories": [
+        "Pricing & Profitability",
+        "Your Listing",
+        "Growth & Marketing"
+      ],
+      "tier": "nice_to_have"
+    },
+    {
+      "amenity": "pet",
+      "normalized_name": "pet_friendly",
+      "mention_count": 7,
+      "insight_examples": [
+        "Offering a pet-friendly stay allows guests to travel with their pet instead of paying for a dog sitter or boarding facility.",
+        "Provide pet-friendly amenities like pet beds, toys, extra towels, and information on local dog parks and veterinarians to enhance the guest experience.",
+        "84% of renters indicated that they would pay more for pet-friendly amenities, particularly for dogs."
+      ],
+      "categories": [
+        "Pricing & Profitability",
+        "Regulations & Compliance",
+        "Your Listing"
+      ],
+      "tier": "nice_to_have"
+    },
+    {
+      "amenity": "air",
+      "normalized_name": "climate_control",
+      "mention_count": 5,
+      "insight_examples": [
+        "Heating and/or air conditioning are critical for guest comfort, regardless of property type or location.",
+        "Ensure good air conditioning for locations with high heat.",
+        "With an electric heat system, expect higher utility costs during the summer, when air conditioning is crucial."
+      ],
+      "categories": [
+        "Your Listing",
+        "Hosting Operations",
+        "Pricing & Profitability"
+      ],
+      "tier": "nice_to_have"
+    },
+    {
+      "amenity": "tv",
+      "normalized_name": "streaming",
+      "mention_count": 5,
+      "insight_examples": [
+        "Having a TV with over-the-air channels or streaming services such as Netflix and Hulu in the living room has become something a guest is likely expecting.",
+        "Providing streaming services like Netflix and HBO Max adds value for guests and can replace traditional cable TV.",
+        "Replace cable TV with high-speed internet and subscriptions to streaming services like Netflix and HBO Max."
+      ],
+      "categories": [
+        "Your Listing"
+      ],
+      "tier": "nice_to_have"
+    },
+    {
+      "amenity": "washer",
+      "normalized_name": "laundry",
+      "mention_count": 4,
+      "insight_examples": [
+        "For laundry management, all units include a washer and dryer, and the cleaning crew start laundry when they arrive to clean the unit.",
+        "Having a stackable washer and dryer, and accessible parking in an STR enables people who come for seasonal events to have the ability to do laundry.",
+        "Always provide laundry detergent if your Airbnb has a washer and dryer."
+      ],
+      "categories": [
+        "Hosting Operations",
+        "Your Listing"
+      ],
+      "tier": "nice_to_have"
+    },
+    {
+      "amenity": "parking",
+      "normalized_name": "parking",
+      "mention_count": 3,
+      "insight_examples": [
+        "Include specific amenity details in your description such as 'indoor fireplace,' '75 mbps wifi,' 'indoor hot tub,' 'onsite garage parking for 2 vehicles,' and '24/7 security.'",
+        "Traffic congestion is expected to be reduced with autonomous vehicles, leading to fewer parking garages and increased mobility, ultimately impacting property usage and value.",
+        "When converting a garage to a game room, consider that the lack of parking may not be a problem if additional parking is available on the property"
+      ],
+      "categories": [
+        "Your Listing",
+        "Getting Started"
+      ],
+      "tier": "nice_to_have"
+    },
+    {
+      "amenity": "desk",
+      "normalized_name": "dedicated_workspace",
+      "mention_count": 2,
+      "insight_examples": [
+        "Setting up a work-from-home desk and a comfy office chair can increase bookings.",
+        "Consider bringing in a larger desk to accommodate longer stays, as some may rent for work from home purposes."
+      ],
+      "categories": [
+        "Your Listing"
+      ],
+      "tier": "nice_to_have"
+    },
+    {
+      "amenity": "hot",
+      "normalized_name": "hot_tub",
+      "mention_count": 1,
+      "insight_examples": [
+        "Adding a jacuzzi or hot tub can increase occupancy by up to 15%."
+      ],
+      "categories": [
+        "Your Listing"
+      ],
+      "tier": "premium"
+    },
+    {
+      "amenity": "patio",
+      "normalized_name": "outdoor_space",
+      "mention_count": 1,
+      "insight_examples": [
+        "Having multiple outdoor spaces, such as balconies and patios, enhances the appeal of a cabin rental by offering guests various areas to enjoy the natural surroundings."
+      ],
+      "categories": [
+        "Your Listing"
+      ],
+      "tier": "nice_to_have"
+    },
+    {
+      "amenity": "self",
+      "normalized_name": "self_check_in",
+      "mention_count": 0,
+      "insight_examples": [],
+      "categories": [],
+      "tier": "nice_to_have"
+    },
+    {
+      "amenity": "ev",
+      "normalized_name": "ev_charger",
+      "mention_count": 0,
+      "insight_examples": [],
+      "categories": [],
+      "tier": "premium"
+    },
+    {
+      "amenity": "grill",
+      "normalized_name": "bbq_grill",
+      "mention_count": 0,
+      "insight_examples": [],
+      "categories": [],
+      "tier": "nice_to_have"
+    },
+    {
+      "amenity": "crib",
+      "normalized_name": "family_friendly",
+      "mention_count": 0,
+      "insight_examples": [],
+      "categories": [],
+      "tier": "nice_to_have"
+    }
+  ],
+  "mistakes": [
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "A costly mistake when designing is just throwing amenities around without any clear strategy. Instead, consider how design choices will impact revenue and guest experience.",
+      "severity": "info",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "overall_rating",
+      "condition_hint": "",
+      "mistake_text": "Many hosts start renovating too early; renovations don't always add value to cash flow.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Not filling out all filters on your listings so guests looking for particular features will not see your properties.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Don't use photos with logos or text on them due to channel restrictions.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Avoid uploading photos smaller than 600x400 pixels, though 1920x1080 is recommended for clarity.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "overall_rating",
+      "condition_hint": "",
+      "mistake_text": "Avoid over-decorating for Christmas, as it can be overwhelming for guests.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Don't prioritize aesthetics in photos over the actual guest experience, as guests will be disappointed if the property looks great but is otherwise lacking.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Photos of amenities without people look stale, making it more difficult for potential guests to imagine themselves in the space.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't overstate the quality or accessibility of nearby amenities; ensure accuracy to avoid disappointing guests.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't assume pricing is the only issue impacting bookings; weak listing content may be the culprit.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't overlook the impact of listing presentation on nightly rates; invest in good lighting, decor, and outdoor setups.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't miss opportunities to highlight unique or memorable features in your area to attract more guests to your listing.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't rely solely on a property's unique features; instead, invest in both renovations and the guest experience to maximize bookings and revenue.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Container homes are difficult to work with, so the addition of windows is a notable feature.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't use boring standard sliding doors; instead, use a live-edge wood slab door to create a unique feature in the bathroom.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't assume that showcasing just your primary accommodation is sufficient; highlight additional experiences or amenities offered on your property to fully capture guest interest.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't design or add features to your property without considering how they would appeal to your target audience.",
+      "severity": "info",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Be sure to highlight and photograph any notable architectural awards that your space has earned.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Just setting up your tent and putting it on Airbnb doesn't make it worth it, you need to furnish and offer certain amenities that you typically wouldn't get out in the wild.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't neglect the outdoor amenities - an outdoor shower, fire pit, and nature trails all add to the guest experience.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't overlook outdoor amenities. They can greatly add to the overall guest experience, making the tiny home more appealing.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Ensure easy access to all the advertised features of the property, such as the hiking trail, to allow easy guest exploration of these features.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "overall_rating",
+      "condition_hint": "",
+      "mistake_text": "You have to consider that a tenant might start smoking on your property. If that occurs they will cause damage. This is because items wear out over time and burn marks cannot be fixed.",
+      "severity": "info",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Failing to capture the entire property with good pictures can detract guests from the property.  Additionally, forgetting a key detail in photographs can also detract from the property.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Don't slouch on bed and pillow quality as this may be reflected in a negative review.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Avoid neglecting amenities like outdoor spaces and fire pits, especially for group bookings. The Sunday House excels in communal areas.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Avoid generic designs; aim for unique features that set your listing apart.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Failing to have professional photos of your listing can cause you to lose out on potential profits.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Ensure the listing photos accurately portray the cabin size; the host found it to be much larger than expected.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Leaving photos of ongoing construction/renovation work. Make sure listing is up to date.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Forgetting outlets when designing a kitchen can be problematic but hiding them can be a unique design feature to increase customer satisfaction.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "When offering wheelchair accessibility, remember to consider where some amenities, like dishes, are placed and ensure they can be reached from a wheelchair.",
+      "severity": "info",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Not showcasing the full range of amenities and unique details may limit the perceived value of the listing and its ability to attract potential guests.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "While showcasing unique features like waterfalls, keep in mind the potential difficulties of building in rugged terrains. Consider how the construction process could affect your budget and timeline.",
+      "severity": "info",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't neglect accessibility features, even in unique listings. An ADA-compliant bathroom demonstrates inclusivity and opens your property to a wider range of guests.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Ensure you offer features that are attractive year-round (e.g., a heated blanket for an outdoor bedroom in a cold environment)",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't overlook the importance of comfortable outdoor areas.  Amenities like hot tubs and fire pits can enhance the guest experience and increase booking appeal.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't overlook essential amenities like a washer and dryer; including these can significantly enhance guest experience.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't underestimate the power of leveraging natural features such as cliffs and rocks to create a unique outdoor shower or other unique amenity.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Do not omit listing amenities that make your property unique.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Ensure accurate information about the area's history and features. An example cited was initially underestimating the height of the dam.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "While touring the property, do not use the promotional advertisement from a sponsoring company when selling the amenities of your property.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "description",
+      "condition_hint": "",
+      "mistake_text": "Do not assume that a property that says \"fall weather\" in the description will actually be fall weather. Check the temperature before booking.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Don't rely on cellphone photos for your listing. Hire a professional photographer instead.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Do not fail to mention a lack of certain amenities, such as wifi or indoor plumbing, to avoid disappointing guests accustomed to conventional accommodation.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Don't post photos that are slightly different or closer from an angle. This hurts, rather than helps, sell the property.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't hide the view or unique features of your property. These are your best assets!",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Don't launch a listing with low quality pictures because travelers are making decisions based on the pictures of the listing.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't assume guests want the same amenities as a typical stay - sometimes omitting a TV or other modern convenience is a value add.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't assume guests know how unique amenities work, such as the toilet's storage tank system.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Failing to provide accurate listing photos can lead to guest dissatisfaction and negative reviews.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "overall_rating",
+      "condition_hint": "",
+      "mistake_text": "Not providing sufficient amenities to enhance the overall guest experience can lead to lower ratings and fewer bookings.  Guests look for unique and thoughtful touches.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "description",
+      "condition_hint": "",
+      "mistake_text": "Don't confuse standard Youtube with Youtube TV in your listing descriptions. This might confuse guests.",
+      "severity": "info",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Consider showing before and after photos to give guests an understanding of any renovations that have taken place and the effort you have put in.",
+      "severity": "info",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "overall_rating",
+      "condition_hint": "",
+      "mistake_text": "Don't skimp on the quality of mattresses or pillows.  That’s an easy place to lose your five-star rating. You may want to spend more on these to avoid this.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "title",
+      "condition_hint": "",
+      "mistake_text": "Filling your title with obvious information already shown by Airbnb. This uses the listing summary's limited real estate for redundant information.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Don't create a listing with unappealing photography, it may deter potential guests.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Avoid offering your guests a lower standard than what's common in your market.  Check out the competition and match the common amenities.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Don't forget to feature all of the amenities when marketing a rental property. If an STR has unique features like waterfalls and hiking trails, make sure to highlight these things in the listing description and photography.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't forget essential amenities, like an AC unit, in very hot climates.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Be sure to properly identify the purpose of certain amenities.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Don't make your listing look boring. If a visitor is not rewarded with something they like quickly, the listing will be closed. Photos add immediate value and keep a visitor \"sticky\".",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Avoid placing real estate images on Airbnb, instead include lifestyle photos.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Avoid not optimizing thumbnail photos. This is the largest image seen on the search spread and attracts travelers to listings.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "minimum_stay",
+      "condition_hint": "",
+      "mistake_text": "Many listings are stuck with a 3 night minimum length stay. It is important to use a platform to have two and three night minimums to attract more traffic.",
+      "severity": "warning",
+      "source_category": "Your Listing"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Adding your listing to a wishlist that is not representative of your true competition can skew your pricing decisions (ie, overpricing an average listing against beautiful listings).",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Real-Time Sync will not be visible in your PriceLabs account settings if you do not have a listing connected to an eligible PMS.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Relying solely on algorithmic estimates for pricing decisions can be risky, as demonstrated by Zillow's loss.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't make it difficult for guests to understand the property by setting up rules so that you cannot view your pricing with the overrides in place.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't rely solely on historical data. Instead, be proactive in adjusting your pricing strategy based on real-time market insights from tools like the PriceLabs Market Dashboard.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Old, outdated pricing rules can accumulate and hinder performance. Periodically clean them up.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Relying only on pricing algorithms like PriceLabs can lead to algorithmic collusion and prevent you from maximizing revenue based on unique market factors and listing attributes. Be mindful of 'herding'.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "cancellation_policy",
+      "condition_hint": "",
+      "mistake_text": "Having a too restrictive cancellation policy could reduce interest from potential guests who might need flexibility. Adapt your cancellation policy to balance protection and appeal.",
+      "severity": "info",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "cancellation_policy",
+      "condition_hint": "",
+      "mistake_text": "Don't expect to avoid all cancellations; factor them into your revenue model.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "cancellation_policy",
+      "condition_hint": "",
+      "mistake_text": "Don't treat cancellations as surprises; include cancellations in your forecast for revenue.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Focusing only on the minimum cash flow projection without accounting for upgrades and data-driven amenities can lead to underperforming.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "cancellation_policy",
+      "condition_hint": "",
+      "mistake_text": "Don't be too sticky on your cancellation policies, to rocket to the top of the algorithm.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't undervalue your rental rates for nights during the FIFA World Cup 2026 season; global fans and corporations will pay premium prices for accommodations.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't get stuck on only thinking about price per night; think instead about overall revenue.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't assume your Airbnb calendar displays the prices you expect, especially with multiple active customizations.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Avoid manually tracking trends or compiling data in spreadsheets; use tools like PriceLabs to automate the process and get insights faster.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Relying only on intuition, rather than reviewing data, can result in being \"wrong\" about peak season and making poor pricing decisions.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Make sure your PriceLabs rules still align with your current strategy and goals. User-defined rules can accumulate over time, especially if you've experimented and made changes later.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Avoid making pricing decisions based on guesswork; instead, use data-driven insights from tools like PriceLabs.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Avoid manually tracking trends or assembling spreadsheets; instead, use PriceLabs' automated tools to anticipate how rooms will perform weeks or months in advance and plan with confidence.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't apply fixed prices to event-based dates or holidays; instead consider dynamic pricing.",
+      "severity": "info",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't solely rely on ChatGPT for pricing strategy, as it may give poor advice that could hurt bookings, like increasing your rates 30% with no supporting data.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "PriceLabs will suggest similar rates for all properties in a market, but they will not manage your unique listing's algorithm. If you over rely on it, you may miss some occupancy opportunities.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Avoid having too many accumulated pricing customizations, as this can complicate your pricing strategy; regularly review and simplify as needed.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Accumulated customizations over time may no longer be aligned with your current strategy. Periodically review and remove any outdated settings.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't rely solely on closed comps when pricing your property, since active competition is equally important.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't leave outdated customizations and pricing rules running as early as 2026 approaches.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't over-rely on dynamic pricing software without understanding your market and how it works. AI needs human oversight and input.  Set appropriate parameters for your market.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Setting overly optimistic prices and continually discounting at the last minute to get bookings is a common mistake.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Over time, custom rules can accumulate in PriceLabs, so regularly review and remove rules that are no longer aligned with your current pricing strategy.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Avoid manually tracking trends or creating Excel spreadsheets, as PriceLabs can automate this process.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "overall_rating",
+      "condition_hint": "",
+      "mistake_text": "Don't assume you can't negotiate a lower price. Always start with a lower offer.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't assume you lost money when you buy the same thing at a higher price later; each transaction stands on its own.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Not including appealing design elements or modern amenities could make it more difficult to charge high prices.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Be wary of comp listings that are new, as the listing has yet to have reviews which are vital to ranking.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't take your eye off Dynamic Pricing Software as it could automatically discount rates which affect your revenue, but it can affect and help your monthly bookings.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "cleaning_fee",
+      "condition_hint": "cleaning_fee_ratio > 0.5",
+      "mistake_text": "Avoid high cleaning fees. Incorporate cleaning fees in the nightly rate, and lower minimum number of night stays to increase chances of booking.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "overall_rating",
+      "condition_hint": "",
+      "mistake_text": "Don't start the early retirement FIRE journey in a situation where it's going to cause deprivation and sacrifice things that make life meaningful.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Novice hosts who enter the market during the wrong period are likely to have high costs and lack dynamic pricing, which affects their profitability.",
+      "severity": "warning",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Do not set a listing and expect it to passively generate income.  Active dynamic pricing and monitoring are critical.",
+      "severity": "critical",
+      "source_category": "Pricing & Profitability"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Don't collapse like the previous host because of bad reviews.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "overall_rating",
+      "condition_hint": "",
+      "mistake_text": "Problem guests can be frustrating when they search for issues, bombard hosts with complaints, refuse offers to fix problems on-site, and instead demand monetary refunds.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Trying to do everything DIY, especially tasks requiring specific skills like design or photography, can lead to a lower-quality product and wasted time.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Don't manage your STR business solely through Airbnb's app. Invest in a dedicated PMS to handle operations, pricing, and communications effectively.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Do not follow advice that states you don't have to drain a hot tub between guests and that it's the same as a pool. It is gross and can result in negative reviews.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Neglecting to provide adequate heating or air conditioning will lead to poor guest reviews and impact occupancy, especially in extreme climates.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Avoid making your guests feel as though they are annoying you when raising an issue because they will worry about receiving a bad review in return.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "photo_count",
+      "condition_hint": "",
+      "mistake_text": "Do not communicate on the same messaging channel as your boss. Create a Whatsapp group with your boss, you, and a virtual assistant. Have the virtual assistant change their name and photo to yours so your boss only thinks they are talking to you.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't type questions in the chat functionality during the Town Hall, use the Q&A feature.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Assuming all guests will be honest in reviews can lead to a false sense of security about the property's condition or guest behavior.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "title",
+      "condition_hint": "",
+      "mistake_text": "Providing streaming service logins can cause guest entitlement and technical issues.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't provide amenities without the needed supplies, such as providing a washer and dryer without detergent.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "overall_rating",
+      "condition_hint": "",
+      "mistake_text": "When you start making everything and tightening everything, check to make sure that you rotated your turnbuckle (tensioner) to tighten it. He said in the video he started in the back, left corner, and he didn't do that and that corner came flying off.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Don't allow one negative review to ruin an entire week. Focus instead on the good reviews and the value you provide to guests.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "The hot tub was undergoing maintenance during the host's visit, emphasizing the importance of keeping amenities in working order.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "cleaning_fee",
+      "condition_hint": "",
+      "mistake_text": "Don't forget to set your cleaning fee. If you don't, you will be responsible for covering it.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't neglect exterior amenities, but also ensure they are well-maintained and safe for guests to fully enjoy.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "cleaning_fee",
+      "condition_hint": "",
+      "mistake_text": "Owners who work with co-hosts run the risk of that co-host overcharging, especially for cleaning costs, which greatly reduces profitability.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "description",
+      "condition_hint": "",
+      "mistake_text": "Don't only do basic cleaning if you pay your cleaners by the job. They have to do all that's listed in the description.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "cancellation_policy",
+      "condition_hint": "",
+      "mistake_text": "Be careful of altering reservations in any way, such as pushing dates to the future. Guests could take advantage of the changes and gain a credit refund.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Relying solely on one quote from a contractor without comparing prices with others can lead to overspending.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "nightly_price",
+      "condition_hint": "",
+      "mistake_text": "Failing to automate cleaning, setting prices on calendar, and guest communication can cause STR businesses to suffer.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "cleaning_fee",
+      "condition_hint": "",
+      "mistake_text": "Don't let the cleaning team eat your profits. Always make sure to collect a cleaning fee from guests.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "overall_rating",
+      "condition_hint": "",
+      "mistake_text": "When integrating a smart lock for guests, avoid getting something too high-tech, as they can break down easily. A simple code-based entry system is recommended.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Relying solely on smart locks without backup plans can cause guest lockouts and negative reviews.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "cleaning_fee",
+      "condition_hint": "",
+      "mistake_text": "Avoid having a cleaning fee that is too low. This can lead guests to have a lower standard of cleanliness on your property.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "description",
+      "condition_hint": "",
+      "mistake_text": "Avoid taking guest's inqueries negatively by trying to ensure that information is easily available in the listing description. Be patient and answer the inquery politely. Make sure not to give them cause to view the host as a problem.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "It is a mistake to automatically charge guests for damages upon checkout because they will leave you a bad review.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Don't take guest reviews personally; care and correct if there is a problem but stay detached and don't get your entire day taken up by one guest or experience.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "If the price is higher for an extra guest or for going over their booking, address that issue right after the booking is up to have a better review.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "review_count",
+      "condition_hint": "",
+      "mistake_text": "Poor turnover can lead to bad reviews and guest refunds.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "amenities",
+      "condition_hint": "",
+      "mistake_text": "Don't pay by the job if you expect your housekeepers to check appliances and electrical components. You are only paying for the house cleaning and not extra amenities that improve user experience.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    },
+    {
+      "trigger_attribute": "title",
+      "condition_hint": "",
+      "mistake_text": "Avoid being an entitled, rigid, or greedy host, because guests are noticing this, and it's pushing them to book elsewhere.",
+      "severity": "warning",
+      "source_category": "Hosting Operations"
+    }
+  ]
+}
