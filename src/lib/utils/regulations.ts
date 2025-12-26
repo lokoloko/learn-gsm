@@ -27,20 +27,20 @@ export const STRICTNESS_META: Record<
 > = {
   strict: {
     label: 'Strict',
-    color: 'text-red-700 dark:text-red-400',
-    bgColor: 'bg-red-100 dark:bg-red-900/30',
+    color: 'text-red-700 dark:text-red-300',
+    bgColor: 'bg-red-50 border border-red-200 dark:bg-red-950 dark:border-red-800',
     description: 'Heavy restrictions on STR operations',
   },
   moderate: {
     label: 'Moderate',
-    color: 'text-amber-700 dark:text-amber-400',
-    bgColor: 'bg-amber-100 dark:bg-amber-900/30',
+    color: 'text-amber-700 dark:text-amber-300',
+    bgColor: 'bg-amber-50 border border-amber-200 dark:bg-amber-950 dark:border-amber-800',
     description: 'Some restrictions with clear permit process',
   },
   permissive: {
     label: 'Permissive',
-    color: 'text-green-700 dark:text-green-400',
-    bgColor: 'bg-green-100 dark:bg-green-900/30',
+    color: 'text-teal-700 dark:text-teal-300',
+    bgColor: 'bg-teal-50 border border-teal-200 dark:bg-teal-950 dark:border-teal-800',
     description: 'Relatively few restrictions on STR operations',
   },
 };
