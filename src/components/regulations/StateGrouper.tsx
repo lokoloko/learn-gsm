@@ -3,7 +3,6 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { ChevronDown, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { StrictnessBadge } from './StrictnessBadge';
 import { groupByState, deriveStrictness } from '@/lib/utils/regulations';
 import { getRegulationUrl, type JurisdictionForDirectory } from '@/types/database';
@@ -32,36 +31,8 @@ export function StateGrouper({ markets, className }: StateGrouperProps) {
     });
   };
 
-  const expandAll = () => {
-    setExpandedStates(new Set(groupedMarkets.keys()));
-  };
-
-  const collapseAll = () => {
-    setExpandedStates(new Set());
-  };
-
   return (
     <div className={cn('space-y-4', className)}>
-      {/* Expand/Collapse Controls */}
-      <div className="flex justify-end gap-2">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={expandAll}
-          className="text-xs"
-        >
-          Expand All
-        </Button>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={collapseAll}
-          className="text-xs"
-        >
-          Collapse All
-        </Button>
-      </div>
-
       {/* State Groups - Grid layout keeps items in fixed positions */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
         {[...groupedMarkets.entries()].map(([stateCode, { stateName, items }]) => {
