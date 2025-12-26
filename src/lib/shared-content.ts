@@ -183,6 +183,7 @@ export const FOOTER_PRODUCT_COLUMNS = {
     mainLink: { label: 'Videos', href: 'https://learn.gostudiom.com/videos', noHighlight: true },
     tools: [
       { label: 'News', href: 'https://learn.gostudiom.com/news' },
+      { label: 'Rules', href: 'https://learn.gostudiom.com/regulations' },
       { label: 'Topics', href: 'https://learn.gostudiom.com/topics' },
     ],
     cta: { label: 'Ask AI →', href: 'https://learn.gostudiom.com/chat' },
